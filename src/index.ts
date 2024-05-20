@@ -3,6 +3,7 @@ import express from 'express'
 import cors from 'cors'
 import databaseServices from '~/services/database.services'
 import usersRouters from '~/routes/users.routes'
+import { defaultErrorHandler } from '~/middlewares/error.middlewares'
 
 config()
 // const databaseServices
@@ -15,6 +16,8 @@ const port = process.env.PORT || 4000
 app.use(express.json())
 // Routes for users
 app.use('/users', usersRouters)
+// Error handler
+app.use(defaultErrorHandler)
 // Health check
 app.use('/health', (req, res) => {
   res.send(`dope shit man, i'm still alive`)
