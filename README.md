@@ -53,4 +53,5 @@ npm i
 ![image](https://github.com/UTH-BrotherHood/BE-PERFUME-SHOP/assets/110114506/a17733b0-482a-491b-9493-4c7a68ec9c60)
 
 - sau đó sử dụng như bình thường , khi có thay đổi tui sẽ commit update lên github cho ae đỡ mất thời gian
+- nếu bị trục trặc thì mọi người vô file `routes` cũng có note hết phần method , header, requestbody, ... sẳn , rồi mọi người tự làm trong postman cũng được
 
