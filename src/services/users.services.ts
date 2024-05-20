@@ -146,6 +146,11 @@ class UsersService {
     console.log('email_verification_token : ', email_verify_token)
     return { access_token, refresh_token }
   }
+
+  async checkEmailExist(email: string) {
+    const result = await databaseServices.query(`SELECT EXISTS (SELECT 1 FROM users WHERE email = $1)`, [email])
+    return result.rows[0].exists
+  }
 }
 
 const usersService = new UsersService()
