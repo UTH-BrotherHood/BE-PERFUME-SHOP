@@ -176,6 +176,34 @@ class UsersService {
       message: USERS_MESSAGES.LOGOUT_SUCCESSFULLY
     }
   }
+
+  async refreshToken({
+    user_id,
+    verify,
+    refresh_token,
+    exp
+  }: {
+    user_id: string
+    verify: userVerificationStatus
+    refresh_token: string
+    exp: number
+  }) {
+    const [new_access_token, new_refresh_token] = await Promise.all([
+      this.signAccessToken({ user_id, verify }),
+      this.signRefreshToken({ user_id, verify, exp }),
+      databaseServices.query(`DELETE FROM refresh_tokens WHERE token = $1`, [refresh_token])
+    ])
+
+    const decode_refresh_token = await this.decodeRefreshToken(new_refresh_token)
+
+    await databaseServices.query(
+      `INSERT INTO refresh_tokens (user_id, token, iat, exp)
+      VALUES ($1, $2, $3, $4)`,
+      [user_id, new_refresh_token, decode_refresh_token.iat, decode_refresh_token.exp]
+    )
+
+    return { access_token: new_access_token, refresh_token: new_refresh_token }
+  }
 }
 
 const usersService = new UsersService()
