@@ -280,8 +280,24 @@ class UsersService {
       message: USERS_MESSAGES.CHECK_EMAIL_TO_RESET_PASSWORD
     }
   }
-}
 
+  async resetPassword(user_id: string, password: string) {
+    const hashed_password = hashPassword(password)
+
+    await databaseServices.query(
+      `UPDATE users
+       SET password = $1,
+           forgot_password_token = '',
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $2`,
+      [hashed_password, user_id]
+    )
+
+    return {
+      message: USERS_MESSAGES.RESET_PASSWORD_SUCCESSFULLY
+    }
+  }
+}
 const usersService = new UsersService()
 
 export default usersService
