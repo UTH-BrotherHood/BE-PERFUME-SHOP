@@ -28,6 +28,12 @@ export const USERS_MESSAGES = {
   REFRESH_TOKEN_IS_INVALID: 'Refresh token is invalid',
   REFRESH_TOKEN_SUCCESSFULLY: 'Refresh token successfully',
   USED_REFRESH_TOKEN_OR_NOT_EXIST: 'Used refresh token or not exist',
+  //Email verification
+  EMAIL_VERIFICATION_TOKEN_REQUIRED: 'Email verification token is required',
+  EMAIL_VERIFICATION_TOKEN_MUST_BE_STRING: 'Email verification token must be a string',
+  EMAIL_ALREADY_VERIFIED: 'Email already verified',
+  USER_NOT_FOUND: 'User not found',
+  EMAIL_VERIFIED_SUCCESSFULLY: 'Email verified successfully',
   //   resendVerifyEmailController
   RESEND_VERIFY_EMAIL_SUCCESSFULLY: 'Resend verify email successfully',
   EMAIL_ALREADY_VERIFIED_BEFORE: 'Email already verified before',

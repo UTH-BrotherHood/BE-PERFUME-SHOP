@@ -116,14 +116,14 @@ class UsersService {
     })
 
     await databaseServices.query(
-      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , verify , cart_id )
+      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , verify , cart_id)
       VALUES ($1, $2, $3, $4, $5, $6, $7 , $8)`,
       [
         user_id,
         user.name || '',
         user.email,
         hashed_password,
-        user.email_verification_token || '',
+        email_verify_token,
         date_of_birth,
         userVerificationStatus.Unverified,
         cart_id
@@ -203,6 +203,36 @@ class UsersService {
     )
 
     return { access_token: new_access_token, refresh_token: new_refresh_token }
+  }
+
+  async verifyEmail(user_id: string) {
+    // Tạo access token và refresh token
+    const [access_token, refresh_token] = await this.signAccessAndRefreshToken({
+      user_id,
+      verify: userVerificationStatus.Verified
+    })
+
+    // Cập nhật trạng thái xác minh email của người dùng trong cơ sở dữ liệu
+    await databaseServices.query(
+      `UPDATE users SET email_verification_token = '', verify = $2, updated_at = NOW() WHERE id = $1`,
+      [user_id, userVerificationStatus.Verified]
+    )
+
+    // Giải mã refresh token
+    const { iat, exp } = await this.decodeRefreshToken(refresh_token)
+
+    // Thêm refresh token vào bảng refresh_tokens
+    await databaseServices.query(`INSERT INTO refresh_tokens (user_id, token, iat, exp) VALUES ($1, $2, $3, $4)`, [
+      user_id,
+      refresh_token,
+      iat,
+      exp
+    ])
+
+    return {
+      access_token,
+      refresh_token
+    }
   }
 }
 
