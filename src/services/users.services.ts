@@ -7,6 +7,7 @@ import databaseServices from '~/services/database.services'
 import { hashPassword } from '~/utils/crypto'
 import { v4 as uuidv4 } from 'uuid'
 import User from '~/models/schemas/user.schemas'
+import { USERS_MESSAGES } from '~/constants/messages'
 config()
 
 const pool = new Pool({
@@ -102,7 +103,6 @@ class UsersService {
   async register(payload: RegisterReqBody) {
     const user_id = uuidv4()
     const cart_id = uuidv4()
-    console.log('user_id : ', user_id)
     const email_verify_token = await this.signEmailVerifyToken({
       user_id: user_id,
       verify: userVerificationStatus.Unverified
@@ -167,6 +167,14 @@ class UsersService {
     )
 
     return { access_token, refresh_token }
+  }
+
+  async logout(refresh_token: string) {
+    await databaseServices.query(`DELETE FROM refresh_tokens WHERE token = $1`, [refresh_token])
+
+    return {
+      message: USERS_MESSAGES.LOGOUT_SUCCESSFULLY
+    }
   }
 }
 
