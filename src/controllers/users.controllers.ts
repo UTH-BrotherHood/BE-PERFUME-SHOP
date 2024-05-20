@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
+import { userVerificationStatus } from '~/constants/enums'
 import HTTP_STATUS from '~/constants/httpStatus'
 import { USERS_MESSAGES } from '~/constants/messages'
 import {
@@ -78,4 +79,24 @@ export const verifyEmailController = async (req: Request<ParamsDictionary, any, 
     message: USERS_MESSAGES.EMAIL_VERIFIED_SUCCESSFULLY,
     result: updateResult
   })
+}
+
+export const resendVerifyEmailController = async (req: Request, res: Response) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+
+  // tìm người dùng
+  const userResult = await databaseServices.query(`SELECT * FROM users WHERE id = $1`, [user_id])
+
+  const user = userResult.rows[0]
+
+  if (!user) {
+    return res.status(HTTP_STATUS.NOT_FOUND).json({ message: USERS_MESSAGES.USER_NOT_FOUND })
+  }
+
+  if (user.verify === userVerificationStatus.Verified) {
+    return res.json({ message: USERS_MESSAGES.EMAIL_ALREADY_VERIFIED_BEFORE })
+  }
+
+  const result = await usersService.resendVerifyEmail(user_id)
+  return res.json(result)
 }
