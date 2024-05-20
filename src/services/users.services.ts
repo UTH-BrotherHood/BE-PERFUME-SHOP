@@ -116,8 +116,8 @@ class UsersService {
     })
 
     await databaseServices.query(
-      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , cart_id )
-      VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , verify , cart_id )
+      VALUES ($1, $2, $3, $4, $5, $6, $7 , $8)`,
       [
         user_id,
         user.name || '',
@@ -125,6 +125,7 @@ class UsersService {
         hashed_password,
         user.email_verification_token || '',
         date_of_birth,
+        userVerificationStatus.Unverified,
         cart_id
       ]
     )
