@@ -32,6 +32,18 @@ npm i
 - Code theo một kiểu thống nhất:
   - Tên file viết thường, tên biến và body request kiểu `Snake Case` (ví dụ: `this_is_snake_case`, `THIS_IS_SCREAMING_SNAKE_CASE`).
 - Sau khi code xong, hãy push lên nhánh `temp`. Sau đó, nếu tất thành viên trong nhóm thống nhất, thì mới merge vô nhánh `main`.
+- Khi tạo một `routes` mới thì note lại cho anh em frontend dễ làm hơn , ví dụ như đoạn code dưới :
+
+```shell
+/*
+Description: This route is used to logout
+Path: /logout
+Method: POST
+Headers: { Authorization : Bearer <accessToken> }
+Body: { refresh_token : string}
+*/
+usersRouters.post('/logout', accessTokenValidation, refreshTokenValidation, wrapRequestHandler(logoutController))
+```
 
 
 ## Docs
