@@ -297,6 +297,17 @@ class UsersService {
       message: USERS_MESSAGES.RESET_PASSWORD_SUCCESSFULLY
     }
   }
+
+  async getMe(user_id: string) {
+    const userQuery = await databaseServices.query(
+      `SELECT id, username, email, phone_number, date_of_birth, created_at, updated_at, verify, avatar, cart_id
+       FROM users
+       WHERE id = $1`,
+      [user_id]
+    )
+
+    return userQuery.rows[0]
+  }
 }
 const usersService = new UsersService()
 
