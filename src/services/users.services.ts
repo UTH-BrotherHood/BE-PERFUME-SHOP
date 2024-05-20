@@ -151,6 +151,23 @@ class UsersService {
     const result = await databaseServices.query(`SELECT EXISTS (SELECT 1 FROM users WHERE email = $1)`, [email])
     return result.rows[0].exists
   }
+
+  async login({ user_id, verify }: { user_id: string; verify: userVerificationStatus }) {
+    const [access_token, refresh_token] = await this.signAccessAndRefreshToken({
+      user_id,
+      verify
+    })
+
+    const { iat, exp } = await this.decodeRefreshToken(refresh_token)
+
+    await databaseServices.query(
+      `INSERT INTO refresh_tokens (user_id, token, iat, exp)
+        VALUES ($1, $2, $3, $4)`,
+      [user_id, refresh_token, iat, exp]
+    )
+
+    return { access_token, refresh_token }
+  }
 }
 
 const usersService = new UsersService()

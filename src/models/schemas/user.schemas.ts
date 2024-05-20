@@ -1,7 +1,7 @@
 import { userVerificationStatus } from '~/constants/enums'
 
 interface UserType {
-  _id?: string
+  id?: string
   name: string
   email: string
   date_of_birth?: Date
@@ -17,7 +17,7 @@ interface UserType {
 }
 
 export default class User {
-  _id?: string
+  id?: string
   name: string
   email: string
   date_of_birth: Date
@@ -32,7 +32,7 @@ export default class User {
 
   constructor(user: UserType) {
     const date = new Date()
-    this._id = user._id
+    this.id = user.id
     this.name = user.name || ''
     this.email = user.email
     this.date_of_birth = user.date_of_birth || new Date()
