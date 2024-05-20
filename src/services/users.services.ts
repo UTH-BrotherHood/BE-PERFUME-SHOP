@@ -256,6 +256,30 @@ class UsersService {
       message: USERS_MESSAGES.RESEND_VERIFY_EMAIL_SUCCESSFULLY
     }
   }
+
+  async forgotPassword({ user_id, verify }: { user_id: string; verify: userVerificationStatus }) {
+    const forgot_password_token = await this.signForgotPasswordToken({
+      user_id,
+      verify
+    })
+
+    // Truy vấn PostgreSQL để cập nhật người dùng
+    await databaseServices.query(
+      `UPDATE users
+       SET forgot_password_token = $1,
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $2`,
+      [forgot_password_token, user_id]
+    )
+
+    // Gửi email chứa link reset password đến email của user ví dụ (nhưng mà chưa làm được nên còn sơ lốc vậy ...):
+    //http://localhost:3000/forgot-password?token=forgot_password_token
+    console.log('Forgot password token : ', forgot_password_token)
+
+    return {
+      message: USERS_MESSAGES.CHECK_EMAIL_TO_RESET_PASSWORD
+    }
+  }
 }
 
 const usersService = new UsersService()
