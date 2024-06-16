@@ -16,7 +16,7 @@ export const createCategoryValidation = validate(
         },
         custom: {
           options: async (value) => {
-            const isCategoryExist = await categoriesService.checkCategoryExist(value)
+            const isCategoryExist = await categoriesService.checkCategoryExistByName(value)
             if (isCategoryExist) {
               throw new Error(CATEGORY_MESSAGES.CATEGORY_ALREADY_EXIST)
             }
