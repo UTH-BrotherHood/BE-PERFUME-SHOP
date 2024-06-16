@@ -59,5 +59,10 @@ export const CATEGORY_MESSAGES = {
   CATEGORY_ALREADY_EXIST: 'Category already exists',
   CATEGORY_NOT_FOUND: 'Category not found',
   CREATE_CATEGORY_SUCCESSFULLY: 'Create category successfully',
-  GET_CATEGORIES_SUCCESSFULLY: 'Get categories successfully'
+  GET_CATEGORIES_SUCCESSFULLY: 'Get categories successfully',
+  GET_CATEGORY_SUCCESSFULLY: 'Get category successfully',
+  UPDATE_CATEGORY_SUCCESSFULLY: 'Update category successfully',
+  DELETE_CATEGORY_SUCCESSFULLY: 'Delete category successfully',
+  CATEGORY_ID_REQUIRED: 'Category id is required',
+  CATEGORY_ID_MUST_BE_STRING: 'Category id must be a string'
 } as const

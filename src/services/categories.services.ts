@@ -4,6 +4,9 @@ import databaseServices from './database.services'
 import { v4 as uuidv4 } from 'uuid'
 import Category from '~/models/schemas/category.schemas'
 import { CategoryReqBody } from '~/models/requests/category.requests'
+import { ErrorWithStatus } from '~/models/errors'
+import HTTP_STATUS from '~/constants/httpStatus'
+import { CATEGORY_MESSAGES } from '~/constants/messages'
 config()
 
 const pool = new Pool({
@@ -44,6 +47,28 @@ class CategoriesService {
     )
 
     return category_just_created.rows[0]
+  }
+  async getCategory(category_id: string) {
+    const category = await databaseServices.query(
+      `SELECT *
+       FROM category
+       WHERE id = $1`,
+      [category_id]
+    )
+    if (!category.rows.length) {
+      return new ErrorWithStatus({
+        status: HTTP_STATUS.NOT_FOUND,
+        message: CATEGORY_MESSAGES.CATEGORY_NOT_FOUND
+      })
+    }
+    return category.rows[0]
+  }
+  async getCategories() {
+    const categories = await databaseServices.query(
+      `SELECT *
+       FROM category`
+    )
+    return categories.rows
   }
 }
 const categoriesService = new CategoriesService()

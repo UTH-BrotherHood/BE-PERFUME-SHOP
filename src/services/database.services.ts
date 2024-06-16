@@ -38,7 +38,7 @@ class DatabaseServices {
       throw error
     }
   }
-  async query(text: string, params: any[]) {
+  async query(text: string, params?: any[]) {
     const client = await this.pool.connect()
     try {
       const res = await client.query(text, params)

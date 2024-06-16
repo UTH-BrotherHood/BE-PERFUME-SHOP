@@ -1,6 +1,10 @@
 import { Router } from 'express'
-import { createCategoryController, getCategoriesController } from '~/controllers/categories.controllers'
-import { createCategoryValidation } from '~/middlewares/categories.middlewares'
+import {
+  createCategoryController,
+  getCategoriesController,
+  getCategoryController
+} from '~/controllers/categories.controllers'
+import { categoryIdValidation, createCategoryValidation } from '~/middlewares/categories.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -19,6 +23,20 @@ categoriesRouter.post(
   accessTokenValidation,
   createCategoryValidation,
   wrapRequestHandler(createCategoryController)
+)
+
+/**
+ * Description: Get category details
+ * Path: /:category_id
+ * Method: GET
+ * Header: {Authorization?: Bearer <access_token> }
+ */
+
+categoriesRouter.get(
+  '/:category_id',
+  accessTokenValidation,
+  categoryIdValidation,
+  wrapRequestHandler(getCategoryController)
 )
 
 /**

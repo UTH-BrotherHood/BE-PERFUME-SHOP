@@ -37,3 +37,17 @@ export const createCategoryValidation = validate(
     ['body']
   )
 )
+
+export const categoryIdValidation = validate(
+  checkSchema({
+    category_id: {
+      notEmpty: {
+        errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_REQUIRED
+      },
+      trim: true,
+      isString: {
+        errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_MUST_BE_STRING
+      }
+    }
+  })
+)
