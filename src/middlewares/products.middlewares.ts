@@ -97,3 +97,29 @@ export const createProductValidation = validate(
     ['body']
   )
 )
+
+export const productIdValidation = validate(
+  checkSchema(
+    {
+      product_id: {
+        notEmpty: {
+          errorMessage: PRODUCTS_MESSAGES.PRODUCT_ID_REQUIRED
+        },
+        trim: true,
+        isString: {
+          errorMessage: PRODUCTS_MESSAGES.PRODUCT_ID_MUST_BE_STRING
+        },
+        custom: {
+          options: async (value) => {
+            const isProductExist = await productsService.checkProdcutExistById(value)
+            if (!isProductExist) {
+              throw new Error(PRODUCTS_MESSAGES.PRODUCT_NOT_FOUND)
+            }
+            return isProductExist
+          }
+        }
+      }
+    },
+    ['params']
+  )
+)

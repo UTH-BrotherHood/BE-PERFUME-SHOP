@@ -33,6 +33,24 @@ class ProductsService {
     const exists = result.rows[0].exists
     return Boolean(exists)
   }
+
+  async checkProdcutExistById(id: string) {
+    const result = await databaseServices.query(
+      `SELECT 
+        EXISTS(
+          SELECT 
+            1 
+          FROM
+            products 
+          WHERE 
+          id = $1
+        );`,
+      [id]
+    )
+    const exists = result.rows[0].exists
+    return Boolean(exists)
+  }
+
   async createProduct(payload: ProductReqBody) {
     const product_id = uuidv4()
 
@@ -63,6 +81,14 @@ class ProductsService {
     )
 
     return category_just_created.rows[0]
+  }
+
+  async deleteProduct(product_id: string) {
+    await databaseServices.query(
+      `DELETE FROM products
+       WHERE id = $1`,
+      [product_id]
+    )
   }
 }
 const productsService = new ProductsService()

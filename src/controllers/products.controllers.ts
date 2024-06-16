@@ -12,3 +12,12 @@ export const createProductController = async (req: Request<ParamsDictionary, any
     result
   })
 }
+
+export const deleteProductController = async (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  const { product_id } = req.params
+  const result = await productsService.deleteProduct(product_id)
+  return res.json({
+    message: PRODUCTS_MESSAGES.DELETE_PRODUCT_SUCCESSFULLY,
+    result
+  })
+}

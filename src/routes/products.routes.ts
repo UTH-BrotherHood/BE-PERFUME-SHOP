@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { createProductController } from '~/controllers/products.controllers'
-import { createProductValidation } from '~/middlewares/products.middlewares'
+import { createProductController, deleteProductController } from '~/controllers/products.controllers'
+import { createProductValidation, productIdValidation } from '~/middlewares/products.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -17,16 +17,16 @@ const productsRouters = Router()
 productsRouters.post('/', accessTokenValidation, createProductValidation, wrapRequestHandler(createProductController))
 
 /**
- * Description: unBookmark
- * Path: /tweets/:tweet_id
+ * Description: delete a product
+ * Path: /:product_id
  * Method: POST
  * Header: {Authorization: Bearer token}
  */
 productsRouters.delete(
-  '/:category_id',
+  '/:product_id',
   accessTokenValidation,
-  categoryIdValidation,
-  wrapRequestHandler(deleteCategoryController)
+  productIdValidation,
+  wrapRequestHandler(deleteProductController)
 )
 
 export default productsRouters
