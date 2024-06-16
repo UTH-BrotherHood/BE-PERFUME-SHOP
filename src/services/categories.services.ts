@@ -91,6 +91,20 @@ class CategoriesService {
 
     return category_just_updated.rows[0]
   }
+  async deleteCategory(category_id: string) {
+    const checkId = await databaseServices.query(`SELECT * FROM category WHERE id = $1`, [category_id])
+    if (!checkId.rows.length) {
+      throw new ErrorWithStatus({
+        status: HTTP_STATUS.NOT_FOUND,
+        message: CATEGORY_MESSAGES.CATEGORY_NOT_FOUND
+      })
+    }
+    await databaseServices.query(
+      `DELETE FROM category
+       WHERE id = $1`,
+      [category_id]
+    )
+  }
   async getCategories() {
     const categories = await databaseServices.query(
       `SELECT *

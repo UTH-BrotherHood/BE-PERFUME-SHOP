@@ -32,6 +32,14 @@ export const updateCategoryController = async (req: Request<ParamsDictionary, an
   })
 }
 
+export const deleteCategoryController = async (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  const { category_id } = req.params
+  await categoriesService.deleteCategory(category_id)
+  return res.json({
+    message: CATEGORY_MESSAGES.DELETE_CATEGORY_SUCCESSFULLY
+  })
+}
+
 export const getCategoriesController = async (req: Request, res: Response, next: NextFunction) => {
   const result = await categoriesService.getCategories()
   return res.json({

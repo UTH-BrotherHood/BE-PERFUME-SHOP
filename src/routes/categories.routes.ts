@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import {
   createCategoryController,
+  deleteCategoryController,
   getCategoriesController,
   getCategoryController,
   updateCategoryController
@@ -57,6 +58,19 @@ categoriesRouter.patch(
   categoryIdValidation,
   updateCategoryValidation,
   wrapRequestHandler(updateCategoryController)
+)
+
+/**
+ * Description: unBookmark
+ * Path: /tweets/:tweet_id
+ * Method: POST
+ * Header: {Authorization: Bearer token}
+ */
+categoriesRouter.delete(
+  '/:category_id',
+  accessTokenValidation,
+  categoryIdValidation,
+  wrapRequestHandler(deleteCategoryController)
 )
 
 /**
