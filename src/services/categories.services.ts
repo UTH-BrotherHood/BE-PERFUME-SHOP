@@ -92,14 +92,6 @@ class CategoriesService {
     const category = new Category({
       ...payload
     })
-    const checkId = await databaseServices.query(`SELECT * FROM category WHERE id = $1`, [category_id])
-    if (!checkId.rows.length) {
-      throw new ErrorWithStatus({
-        status: HTTP_STATUS.NOT_FOUND,
-        message: CATEGORY_MESSAGES.CATEGORY_NOT_FOUND
-      })
-    }
-
     await databaseServices.query(
       `UPDATE category
        SET name = $1, description = $2, updated_at = NOW()

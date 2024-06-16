@@ -6,11 +6,7 @@ import {
   getCategoryController,
   updateCategoryController
 } from '~/controllers/categories.controllers'
-import {
-  categoryIdValidation,
-  createCategoryValidation,
-  updateCategoryValidation
-} from '~/middlewares/categories.middlewares'
+import { CategoryValidation, categoryIdValidation } from '~/middlewares/categories.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -24,12 +20,7 @@ const categoriesRouter = Router()
  * Body : CategoryResBody
  */
 
-categoriesRouter.post(
-  '/',
-  accessTokenValidation,
-  createCategoryValidation,
-  wrapRequestHandler(createCategoryController)
-)
+categoriesRouter.post('/', accessTokenValidation, CategoryValidation, wrapRequestHandler(createCategoryController))
 
 /**
  * Description: Get category details
@@ -56,7 +47,7 @@ categoriesRouter.patch(
   '/:category_id',
   accessTokenValidation,
   categoryIdValidation,
-  updateCategoryValidation,
+  CategoryValidation,
   wrapRequestHandler(updateCategoryController)
 )
 

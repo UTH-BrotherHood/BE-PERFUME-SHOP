@@ -3,7 +3,7 @@ import { CATEGORY_MESSAGES } from '~/constants/messages'
 import categoriesService from '~/services/categories.services'
 import { validate } from '~/utils/validation.utils'
 
-export const createCategoryValidation = validate(
+export const CategoryValidation = validate(
   checkSchema(
     {
       name: {
@@ -15,7 +15,7 @@ export const createCategoryValidation = validate(
           errorMessage: CATEGORY_MESSAGES.NAME_MUST_BE_STRING
         },
         custom: {
-          options: async (value) => {
+          options: async (value, { req }) => {
             const isCategoryExist = await categoriesService.checkCategoryExistByName(value)
             if (isCategoryExist) {
               throw new Error(CATEGORY_MESSAGES.CATEGORY_ALREADY_EXIST)
@@ -39,50 +39,28 @@ export const createCategoryValidation = validate(
 )
 
 export const categoryIdValidation = validate(
-  checkSchema({
-    category_id: {
-      notEmpty: {
-        errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_REQUIRED
-      },
-      trim: true,
-      isString: {
-        errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_MUST_BE_STRING
-      },
-      custom: {
-        options: async (value) => {
-          const isCategoryExist = await categoriesService.checkCategoryExist(value)
-          if (isCategoryExist) {
-            throw new Error(CATEGORY_MESSAGES.CATEGORY_ALREADY_EXIST)
-          }
-          return !isCategoryExist
-        }
-      }
-    }
-  })
-)
-
-export const updateCategoryValidation = validate(
   checkSchema(
     {
-      name: {
+      category_id: {
         notEmpty: {
-          errorMessage: CATEGORY_MESSAGES.NAME_OF_CATEGORY_REQUIRED
+          errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_REQUIRED
         },
         trim: true,
         isString: {
-          errorMessage: CATEGORY_MESSAGES.NAME_MUST_BE_STRING
-        }
-      },
-      description: {
-        notEmpty: {
-          errorMessage: CATEGORY_MESSAGES.DESCRIPTION_OF_CATEGORY_REQUIRED
+          errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_MUST_BE_STRING
         },
-        trim: true,
-        isString: {
-          errorMessage: CATEGORY_MESSAGES.CATEGORY_MUST_BE_STRING
+        custom: {
+          options: async (value) => {
+            console.log(value)
+            const isCategoryExist = await categoriesService.checkCategoryExist(value)
+            if (!isCategoryExist) {
+              throw new Error(CATEGORY_MESSAGES.CATEGORY_NOT_FOUND)
+            }
+            return isCategoryExist
+          }
         }
       }
     },
-    ['body']
+    ['params']
   )
 )
