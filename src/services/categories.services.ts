@@ -56,7 +56,7 @@ class CategoriesService {
       [category_id]
     )
     if (!category.rows.length) {
-      return new ErrorWithStatus({
+      throw new ErrorWithStatus({
         status: HTTP_STATUS.NOT_FOUND,
         message: CATEGORY_MESSAGES.CATEGORY_NOT_FOUND
       })
