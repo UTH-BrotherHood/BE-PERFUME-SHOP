@@ -66,3 +66,30 @@ export const CATEGORY_MESSAGES = {
   CATEGORY_ID_REQUIRED: 'Category id is required',
   CATEGORY_ID_MUST_BE_STRING: 'Category id must be a string'
 } as const
+
+export const PRODUCTS_MESSAGES = {
+  NAME_OF_PRODUCT_REQUIRED: 'Name of product is required',
+  DESCRIPTION_OF_PRODUCT_REQUIRED: 'Description of product is required',
+  NAME_MUST_BE_STRING: 'Name must be a string',
+  PRODUCT_REQUIRED: 'Product is required',
+  DISCOUNT_MUST_BE_NUMBER: 'Discount must be a number',
+  IMAGES_IS_REQUIRED: 'Images is required',
+  IMAGES_MUST_BE_ARRAY: 'Images must be an array',
+  IMAGES_MUST_BE_AN_ARRAY_OF_STRING: 'Images must be an array of string',
+  STOCK_MUST_BE_NUMBER: 'Stock must be a number',
+  STOCK_IS_REQUIRED: 'Stock is required',
+  PRICE_IS_REQUIRED: 'Price is required',
+  PRICE_MUST_BE_NUMBER: 'Price must be a number',
+  CATEGORY_ID_REQUIRED: 'Category id is required',
+  CATEGORY_ID_MUST_BE_STRING: 'Category id must be a string',
+  PRODUCT_MUST_BE_STRING: 'Product must be a string',
+  PRODUCT_ALREADY_EXIST: 'Product already exists',
+  PRODUCT_NOT_FOUND: 'Product not found',
+  CREATE_PRODUCT_SUCCESSFULLY: 'Create product successfully',
+  GET_PRODUCTS_SUCCESSFULLY: 'Get products successfully',
+  GET_PRODUCT_SUCCESSFULLY: 'Get product successfully',
+  UPDATE_PRODUCT_SUCCESSFULLY: 'Update product successfully',
+  DELETE_PRODUCT_SUCCESSFULLY: 'Delete product successfully',
+  PRODUCT_ID_REQUIRED: 'Product id is required',
+  PRODUCT_ID_MUST_BE_STRING: 'Product id must be a string'
+} as const

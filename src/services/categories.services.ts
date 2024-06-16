@@ -18,15 +18,40 @@ const pool = new Pool({
 })
 
 class CategoriesService {
-  async checkCategoryExist(name: string) {
+  async checkCategoryExist(id: string) {
     const result = await databaseServices.query(
-      `SELECT name FROM category
-        WHERE name = $1;`,
+      `SELECT 
+        EXISTS(
+          SELECT 
+            1 
+          FROM
+            category 
+          WHERE 
+          id = $1
+        );`,
+      [id]
+    )
+    const exists = result.rows[0].exists
+    return Boolean(exists)
+  }
+
+  async checkCategoryExistByName(name: string) {
+    const result = await databaseServices.query(
+      `SELECT 
+        EXISTS(
+          SELECT 
+            1 
+          FROM
+            category 
+          WHERE 
+          name = $1
+        );`,
       [name]
     )
-    return Boolean(result.rows.length)
+    const exists = result.rows[0].exists
+    return Boolean(exists)
   }
-  async creatCategory(payload: CategoryReqBody) {
+  async createCategory(payload: CategoryReqBody) {
     const category_id = uuidv4()
 
     const category = new Category({

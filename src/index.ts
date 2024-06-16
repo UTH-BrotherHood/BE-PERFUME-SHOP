@@ -5,6 +5,7 @@ import databaseServices from '~/services/database.services'
 import usersRouters from '~/routes/users.routes'
 import { defaultErrorHandler } from '~/middlewares/error.middlewares'
 import categoriesRouter from './routes/categories.routes'
+import productsRouters from './routes/products.routes'
 
 config()
 // const databaseServices
@@ -19,6 +20,8 @@ app.use(express.json())
 app.use('/users', usersRouters)
 // Routes for categories
 app.use('/categories', categoriesRouter)
+// Routes for products
+app.use('/products', productsRouters)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check

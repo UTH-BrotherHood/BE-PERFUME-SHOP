@@ -41,11 +41,9 @@ CREATE TABLE IF NOT EXISTS users (
 -- Tạo bảng carts
 CREATE TABLE IF NOT EXISTS carts (
     id VARCHAR(255) NOT NULL PRIMARY KEY,
-    user_id VARCHAR(255) NOT NULL, -- Liên kết ngoại với bảng users
-    product_id VARCHAR(255) NOT NULL, -- Liên kết ngoại với bảng products
+    user_id VARCHAR(255) NOT NULL, 
+    product_id VARCHAR(255) NOT NULL, 
     quantity INTEGER DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (product_id) REFERENCES products (id)
 );
