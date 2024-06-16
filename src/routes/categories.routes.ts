@@ -61,8 +61,8 @@ categoriesRouter.patch(
 )
 
 /**
- * Description: unBookmark
- * Path: /tweets/:tweet_id
+ * Description: Delete category
+ * Path: /:category_id
  * Method: POST
  * Header: {Authorization: Bearer token}
  */
