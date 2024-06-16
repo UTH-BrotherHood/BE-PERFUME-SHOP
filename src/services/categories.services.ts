@@ -63,6 +63,27 @@ class CategoriesService {
     }
     return category.rows[0]
   }
+  async updateCategory(category_id: string, payload: CategoryReqBody) {
+    const category = new Category({
+      ...payload
+    })
+
+    await databaseServices.query(
+      `UPDATE category
+       SET name = $1, description = $2, updated_at = NOW()
+       WHERE id = $3`,
+      [category.name, category.description, category_id]
+    )
+
+    const category_just_updated = await databaseServices.query(
+      `SELECT *
+       FROM category
+       WHERE id = $1`,
+      [category_id]
+    )
+
+    return category_just_updated.rows[0]
+  }
   async getCategories() {
     const categories = await databaseServices.query(
       `SELECT *

@@ -47,7 +47,42 @@ export const categoryIdValidation = validate(
       trim: true,
       isString: {
         errorMessage: CATEGORY_MESSAGES.CATEGORY_ID_MUST_BE_STRING
+      },
+      custom: {
+        options: async (value) => {
+          const isCategoryExist = await categoriesService.checkCategoryExist(value)
+          if (isCategoryExist) {
+            throw new Error(CATEGORY_MESSAGES.CATEGORY_ALREADY_EXIST)
+          }
+          return !isCategoryExist
+        }
       }
     }
   })
+)
+
+export const updateCategoryValidation = validate(
+  checkSchema(
+    {
+      name: {
+        notEmpty: {
+          errorMessage: CATEGORY_MESSAGES.NAME_OF_CATEGORY_REQUIRED
+        },
+        trim: true,
+        isString: {
+          errorMessage: CATEGORY_MESSAGES.NAME_MUST_BE_STRING
+        }
+      },
+      description: {
+        notEmpty: {
+          errorMessage: CATEGORY_MESSAGES.DESCRIPTION_OF_CATEGORY_REQUIRED
+        },
+        trim: true,
+        isString: {
+          errorMessage: CATEGORY_MESSAGES.CATEGORY_MUST_BE_STRING
+        }
+      }
+    },
+    ['body']
+  )
 )

@@ -2,9 +2,14 @@ import { Router } from 'express'
 import {
   createCategoryController,
   getCategoriesController,
-  getCategoryController
+  getCategoryController,
+  updateCategoryController
 } from '~/controllers/categories.controllers'
-import { categoryIdValidation, createCategoryValidation } from '~/middlewares/categories.middlewares'
+import {
+  categoryIdValidation,
+  createCategoryValidation,
+  updateCategoryValidation
+} from '~/middlewares/categories.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -37,6 +42,21 @@ categoriesRouter.get(
   accessTokenValidation,
   categoryIdValidation,
   wrapRequestHandler(getCategoryController)
+)
+
+/*
+Description: Update category
+Path: /me
+Headers: { Authorization : Bearer <accessToken> }
+Method: PATCH
+Body : User Schema
+*/
+categoriesRouter.patch(
+  '/:category_id',
+  accessTokenValidation,
+  categoryIdValidation,
+  updateCategoryValidation,
+  wrapRequestHandler(updateCategoryController)
 )
 
 /**
