@@ -25,12 +25,6 @@ export const getCategoryController = async (req: Request<ParamsDictionary, any, 
 
 export const updateCategoryController = async (req: Request<ParamsDictionary, any, CategoryReqBody>, res: Response) => {
   const { category_id } = req.params
-  const checkId = await databaseServices.query(`SELECT * FROM category WHERE id = $1`, [category_id])
-  if (!checkId.rows.length) {
-    return res.status(HTTP_STATUS.NOT_FOUND).json({
-      message: CATEGORY_MESSAGES.CATEGORY_NOT_FOUND
-    })
-  }
   const result = await categoriesService.updateCategory(category_id, req.body)
   return res.json({
     message: CATEGORY_MESSAGES.UPDATE_CATEGORY_SUCCESSFULLY,
