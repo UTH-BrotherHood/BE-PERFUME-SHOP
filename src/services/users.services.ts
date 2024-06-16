@@ -102,7 +102,6 @@ class UsersService {
   }
   async register(payload: RegisterReqBody) {
     const user_id = uuidv4()
-    const cart_id = uuidv4()
     const email_verify_token = await this.signEmailVerifyToken({
       user_id: user_id,
       verify: userVerificationStatus.Unverified
@@ -116,8 +115,8 @@ class UsersService {
     })
 
     await databaseServices.query(
-      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , verify , cart_id)
-      VALUES ($1, $2, $3, $4, $5, $6, $7 , $8)`,
+      `INSERT INTO users (id, username, email, password, email_verification_token, date_of_birth , verify )
+      VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       [
         user_id,
         user.name || '',
@@ -125,8 +124,7 @@ class UsersService {
         hashed_password,
         email_verify_token,
         date_of_birth,
-        userVerificationStatus.Unverified,
-        cart_id
+        userVerificationStatus.Unverified
       ]
     )
 

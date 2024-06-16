@@ -1,6 +1,6 @@
 -- Tạo bảng category
 CREATE TABLE IF NOT EXISTS category (
-    id SERIAL PRIMARY KEY,
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     description TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -16,7 +16,7 @@ CREATE TABLE IF NOT EXISTS products (
     discount FLOAT,
     stock INTEGER DEFAULT 0,
     images VARCHAR(255)[] DEFAULT ARRAY[]::VARCHAR(255)[],
-    category_id SERIAL,
+    category_id VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (category_id) REFERENCES category (id)

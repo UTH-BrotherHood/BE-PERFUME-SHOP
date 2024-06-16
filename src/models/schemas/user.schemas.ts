@@ -14,7 +14,6 @@ interface UserType {
 
   username?: string
   avatar?: string
-  cart_id?: string
 }
 
 export default class User {
@@ -30,8 +29,6 @@ export default class User {
   verify: userVerificationStatus
   username: string
   avatar: string
-  cart_id?: string
-
   constructor(user: UserType) {
     const date = new Date()
     this.id = user.id
@@ -46,6 +43,5 @@ export default class User {
     this.verify = user.verify || userVerificationStatus.Unverified
     this.username = user.username || ''
     this.avatar = user.avatar || ''
-    this.cart_id = user.cart_id
   }
 }

@@ -47,7 +47,6 @@ Body: {
 }
  */
 usersRouters.post('/login', loginValidation, wrapRequestHandler(loginController))
-export default usersRouters
 
 /*
 Description: This route is used to logout
@@ -119,3 +118,5 @@ Headers: { Authorization : Bearer <accessToken> }
 Method: GET
 */
 usersRouters.get('/me', accessTokenValidation, wrapRequestHandler(meController))
+
+export default usersRouters

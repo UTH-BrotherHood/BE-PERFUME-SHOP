@@ -48,3 +48,13 @@ export const USERS_MESSAGES = {
   // get me
   GET_ME_SUCCESSFULLY: 'Get me successfully'
 } as const
+
+export const CATEGORY_MESSAGES = {
+  CATEGORY_REQUIRED: 'Category is required',
+  CATEGORY_MUST_BE_STRING: 'Category must be a string',
+  CATEGORY_LENGTH: 'Category must be at least 1 character long and at most 100 characters long',
+  CATEGORY_ALREADY_EXIST: 'Category already exists',
+  CATEGORY_NOT_FOUND: 'Category not found',
+  CREATE_CATEGORY_SUCCESSFULLY: 'Create category successfully',
+  GET_CATEGORIES_SUCCESSFULLY: 'Get categories successfully'
+} as const

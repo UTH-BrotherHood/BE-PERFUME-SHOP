@@ -4,6 +4,7 @@ import cors from 'cors'
 import databaseServices from '~/services/database.services'
 import usersRouters from '~/routes/users.routes'
 import { defaultErrorHandler } from '~/middlewares/error.middlewares'
+import categoriesRouter from './routes/categories.routes'
 
 config()
 // const databaseServices
@@ -16,6 +17,8 @@ const port = process.env.PORT || 4000
 app.use(express.json())
 // Routes for users
 app.use('/users', usersRouters)
+// Routes for categories
+app.use('/categories', categoriesRouter)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check
