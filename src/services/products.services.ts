@@ -90,6 +90,24 @@ class ProductsService {
       [product_id]
     )
   }
+
+  async getProducts() {
+    const result = await databaseServices.query(
+      `SELECT *
+       FROM products`
+    )
+    return result.rows
+  }
+
+  async getProduct(product_id: string) {
+    const result = await databaseServices.query(
+      `SELECT *
+       FROM products
+       WHERE id = $1`,
+      [product_id]
+    )
+    return result.rows[0]
+  }
 }
 const productsService = new ProductsService()
 
