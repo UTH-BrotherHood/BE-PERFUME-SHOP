@@ -50,6 +50,9 @@ export const USERS_MESSAGES = {
 } as const
 
 export const CATEGORY_MESSAGES = {
+  NAME_OF_CATEGORY_REQUIRED: 'Name of category is required',
+  DESCRIPTION_OF_CATEGORY_REQUIRED: 'Description of category is required',
+  NAME_MUST_BE_STRING: 'Name must be a string',
   CATEGORY_REQUIRED: 'Category is required',
   CATEGORY_MUST_BE_STRING: 'Category must be a string',
   CATEGORY_LENGTH: 'Category must be at least 1 character long and at most 100 characters long',

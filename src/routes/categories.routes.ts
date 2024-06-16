@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { createCategoryController, getCategoriesController } from '~/controllers/categories.controllers'
+import { createCategoryValidation } from '~/middlewares/categories.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -13,7 +14,12 @@ const categoriesRouter = Router()
  * Body : CategoryResBody
  */
 
-categoriesRouter.post('/', accessTokenValidation, wrapRequestHandler(createCategoryController))
+categoriesRouter.post(
+  '/',
+  accessTokenValidation,
+  createCategoryValidation,
+  wrapRequestHandler(createCategoryController)
+)
 
 /**
  * Description: Get all categories

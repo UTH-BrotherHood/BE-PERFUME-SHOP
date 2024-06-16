@@ -1,6 +1,6 @@
 import { Pool } from 'pg'
 import { config } from 'dotenv'
-import databaseServices from '~/services/database.services'
+import databaseServices from './database.services'
 import { v4 as uuidv4 } from 'uuid'
 import Category from '~/models/schemas/category.schemas'
 import { CategoryReqBody } from '~/models/requests/category.requests'
@@ -15,6 +15,14 @@ const pool = new Pool({
 })
 
 class CategoriesService {
+  async checkCategoryExist(name: string) {
+    const result = await databaseServices.query(
+      `SELECT name FROM category
+        WHERE name = $1;`,
+      [name]
+    )
+    return Boolean(result.rows.length)
+  }
   async creatCategory(payload: CategoryReqBody) {
     const category_id = uuidv4()
 
