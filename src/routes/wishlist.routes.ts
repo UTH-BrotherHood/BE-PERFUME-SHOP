@@ -10,7 +10,7 @@ const wishlistRouters = Router()
  * Description: add to wishlist
  * Path: /
  * Method: POST
- * Body : { tweet_id : string}
+ * Body : { product_id : string}
  * Header: {Authorization: Bearer token}
  */
 wishlistRouters.post(
@@ -25,6 +25,7 @@ wishlistRouters.post(
  * Description: delete from wishlist
  * Path: /
  * Method: POST
+ * Body : { product_id : string}
  * Header: {Authorization: Bearer token}
  */
 wishlistRouters.delete(
