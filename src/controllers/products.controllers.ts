@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express'
 import { ParamsDictionary } from 'express-serve-static-core'
 import { PRODUCTS_MESSAGES } from '~/constants/messages'
-import { ProductReqBody } from '~/models/requests/product.requests'
+import { ProductReqBody, UpdateProductReqBody } from '~/models/requests/product.requests'
 import productsService from '~/services/products.services'
 
 export const createProductController = async (req: Request<ParamsDictionary, any, ProductReqBody>, res: Response) => {
-  console.log(req.body)
   const result = await productsService.createProduct(req.body)
   return res.json({
     message: PRODUCTS_MESSAGES.CREATE_PRODUCT_SUCCESSFULLY,
@@ -35,6 +34,19 @@ export const getProductController = async (req: Request<ParamsDictionary, any, a
   const result = await productsService.getProduct(product_id)
   return res.json({
     message: PRODUCTS_MESSAGES.GET_PRODUCT_SUCCESSFULLY,
+    result
+  })
+}
+
+export const updateProductController = async (
+  req: Request<ParamsDictionary, any, UpdateProductReqBody>,
+  res: Response
+) => {
+  const { product_id } = req.params
+  console.log('req.body', req.body)
+  const result = await productsService.updateProduct(product_id, req.body)
+  return res.json({
+    message: PRODUCTS_MESSAGES.UPDATE_PRODUCT_SUCCESSFULLY,
     result
   })
 }

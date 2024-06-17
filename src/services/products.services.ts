@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid'
 import Category from '~/models/schemas/category.schemas'
 import { CategoryReqBody } from '~/models/requests/category.requests'
 import Product from '~/models/schemas/product.shemas'
-import { ProductReqBody } from '~/models/requests/product.requests'
+import { ProductReqBody, UpdateProductReqBody } from '~/models/requests/product.requests'
 config()
 
 const pool = new Pool({
@@ -17,7 +17,7 @@ const pool = new Pool({
 })
 
 class ProductsService {
-  async checkProdcutExistByName(name: string) {
+  async checkProductExistByName(name: string) {
     const result = await databaseServices.query(
       `SELECT 
         EXISTS(
@@ -107,6 +107,58 @@ class ProductsService {
       [product_id]
     )
     return result.rows[0]
+  }
+
+  async updateProduct(product_id: string, payload: UpdateProductReqBody) {
+    // Lấy thông tin hiện tại của sản phẩm
+    const currentProduct = await databaseServices.query(`SELECT * FROM products WHERE id = $1`, [product_id])
+
+    if (currentProduct.rows.length === 0) {
+      throw new Error('Product not found')
+    }
+
+    const product = currentProduct.rows[0]
+
+    // Cập nhật các trường chỉ nếu chúng có giá trị trong payload
+    const updatedProduct = {
+      name: payload.name !== undefined ? payload.name : product.name,
+      description: payload.description !== undefined ? payload.description : product.description,
+      discount: payload.discount !== undefined ? payload.discount : product.discount,
+      images: payload.images !== undefined ? payload.images : product.images,
+      stock: payload.stock !== undefined ? payload.stock : product.stock,
+      price: payload.price !== undefined ? payload.price : product.price
+    }
+
+    await databaseServices.query(
+      `UPDATE products
+         SET 
+             name = $1,
+             description = $2,
+             discount = $3,
+             images = $4,
+             stock = $5,
+             price = $6,
+             updated_at = NOW()
+         WHERE id = $7`,
+      [
+        updatedProduct.name,
+        updatedProduct.description,
+        updatedProduct.discount,
+        updatedProduct.images,
+        updatedProduct.stock,
+        updatedProduct.price,
+        product_id
+      ]
+    )
+
+    const product_just_updated = await databaseServices.query(
+      `SELECT *
+         FROM products
+         WHERE id = $1`,
+      [product_id]
+    )
+
+    return product_just_updated.rows[0]
   }
 }
 const productsService = new ProductsService()

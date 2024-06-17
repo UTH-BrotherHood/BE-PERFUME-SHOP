@@ -3,9 +3,14 @@ import {
   createProductController,
   deleteProductController,
   getProductController,
-  getProductsController
+  getProductsController,
+  updateProductController
 } from '~/controllers/products.controllers'
-import { createProductValidation, productIdValidation } from '~/middlewares/products.middlewares'
+import {
+  createProductValidation,
+  productIdValidation,
+  updateProductValidation
+} from '~/middlewares/products.middlewares'
 import { accessTokenValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -55,6 +60,21 @@ productsRouters.get(
   accessTokenValidation,
   productIdValidation,
   wrapRequestHandler(getProductController)
+)
+
+/*
+Description: Update product
+Path: /:product_id
+Headers: { Authorization : Bearer <accessToken> }
+Method: PATCH
+Body : User Schema
+*/
+productsRouters.patch(
+  '/:product_id',
+  accessTokenValidation,
+  productIdValidation,
+  updateProductValidation,
+  wrapRequestHandler(updateProductController)
 )
 
 export default productsRouters

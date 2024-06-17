@@ -17,7 +17,7 @@ export const createProductValidation = validate(
         },
         custom: {
           options: async (value) => {
-            const isProductExist = await productsService.checkProdcutExistByName(value)
+            const isProductExist = await productsService.checkProductExistByName(value)
             if (isProductExist) {
               throw new Error(PRODUCTS_MESSAGES.PRODUCT_ALREADY_EXIST)
             }
@@ -121,5 +121,94 @@ export const productIdValidation = validate(
       }
     },
     ['params']
+  )
+)
+export const updateProductValidation = validate(
+  checkSchema(
+    {
+      name: {
+        optional: true,
+        trim: true,
+        isString: {
+          errorMessage: PRODUCTS_MESSAGES.NAME_MUST_BE_STRING
+        },
+        custom: {
+          options: async (value) => {
+            if (value) {
+              // Chỉ kiểm tra nếu giá trị được cung cấp
+              const isProductExist = await productsService.checkProductExistByName(value)
+              if (isProductExist) {
+                throw new Error(PRODUCTS_MESSAGES.PRODUCT_ALREADY_EXIST)
+              }
+              return true
+            }
+            return true
+          }
+        }
+      },
+      description: {
+        optional: true,
+        trim: true,
+        isString: {
+          errorMessage: PRODUCTS_MESSAGES.PRODUCT_MUST_BE_STRING
+        }
+      },
+      discount: {
+        optional: true,
+        trim: true,
+        isNumeric: {
+          errorMessage: PRODUCTS_MESSAGES.DISCOUNT_MUST_BE_NUMBER
+        }
+      },
+      images: {
+        optional: true,
+        isArray: {
+          errorMessage: PRODUCTS_MESSAGES.IMAGES_MUST_BE_ARRAY
+        },
+        custom: {
+          options: (value) => {
+            if (value && value.some((item: any) => typeof item !== 'string')) {
+              throw new Error(PRODUCTS_MESSAGES.IMAGES_MUST_BE_AN_ARRAY_OF_STRING)
+            }
+            return true
+          }
+        }
+      },
+      stock: {
+        optional: true,
+        trim: true,
+        isNumeric: {
+          errorMessage: PRODUCTS_MESSAGES.STOCK_MUST_BE_NUMBER
+        }
+      },
+      price: {
+        optional: true,
+        trim: true,
+        isNumeric: {
+          errorMessage: PRODUCTS_MESSAGES.PRICE_MUST_BE_NUMBER
+        }
+      },
+      category_id: {
+        optional: true,
+        trim: true,
+        isString: {
+          errorMessage: PRODUCTS_MESSAGES.CATEGORY_ID_MUST_BE_STRING
+        },
+        custom: {
+          options: async (value) => {
+            if (value) {
+              // Chỉ kiểm tra nếu giá trị được cung cấp
+              const isCategoryExist = await categoriesService.checkCategoryExist(value)
+              if (!isCategoryExist) {
+                throw new Error(CATEGORY_MESSAGES.CATEGORY_NOT_FOUND)
+              }
+              return true
+            }
+            return true
+          }
+        }
+      }
+    },
+    ['body']
   )
 )

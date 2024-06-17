@@ -51,7 +51,6 @@ export const categoryIdValidation = validate(
         },
         custom: {
           options: async (value) => {
-            console.log(value)
             const isCategoryExist = await categoriesService.checkCategoryExist(value)
             if (!isCategoryExist) {
               throw new Error(CATEGORY_MESSAGES.CATEGORY_NOT_FOUND)
