@@ -27,7 +27,7 @@ export const getProductsController = async (req: Request<ParamsDictionary, any, 
   const result = await productsService.getProducts(limit, page)
   return res.json({
     message: PRODUCTS_MESSAGES.GET_PRODUCTS_SUCCESSFULLY,
-    result,
+    ...result,
     limit,
     page,
     total_pages: Math.ceil(result.total / limit)
