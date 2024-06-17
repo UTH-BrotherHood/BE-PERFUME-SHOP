@@ -8,6 +8,7 @@ import {
 } from '~/controllers/products.controllers'
 import {
   createProductValidation,
+  panigationValidation,
   productIdValidation,
   updateProductValidation
 } from '~/middlewares/products.middlewares'
@@ -46,7 +47,7 @@ productsRouters.delete(
  * Header: {Authorization?: Bearer <access_token> }
  */
 
-productsRouters.get('/', accessTokenValidation, wrapRequestHandler(getProductsController))
+productsRouters.get('/', accessTokenValidation, panigationValidation, wrapRequestHandler(getProductsController))
 
 /**
  * Description: Get product details

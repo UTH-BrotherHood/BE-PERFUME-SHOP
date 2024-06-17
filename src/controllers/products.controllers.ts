@@ -22,10 +22,15 @@ export const deleteProductController = async (req: Request<ParamsDictionary, any
 }
 
 export const getProductsController = async (req: Request<ParamsDictionary, any, any>, res: Response) => {
-  const result = await productsService.getProducts()
+  const limit = Number(req.query.limit as string)
+  const page = Number(req.query.page as string)
+  const result = await productsService.getProducts(limit, page)
   return res.json({
     message: PRODUCTS_MESSAGES.GET_PRODUCTS_SUCCESSFULLY,
-    result
+    result,
+    limit,
+    page,
+    total_pages: Math.ceil(result.total / limit)
   })
 }
 
@@ -43,7 +48,6 @@ export const updateProductController = async (
   res: Response
 ) => {
   const { product_id } = req.params
-  console.log('req.body', req.body)
   const result = await productsService.updateProduct(product_id, req.body)
   return res.json({
     message: PRODUCTS_MESSAGES.UPDATE_PRODUCT_SUCCESSFULLY,

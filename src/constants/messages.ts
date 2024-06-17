@@ -91,5 +91,7 @@ export const PRODUCTS_MESSAGES = {
   UPDATE_PRODUCT_SUCCESSFULLY: 'Update product successfully',
   DELETE_PRODUCT_SUCCESSFULLY: 'Delete product successfully',
   PRODUCT_ID_REQUIRED: 'Product id is required',
-  PRODUCT_ID_MUST_BE_STRING: 'Product id must be a string'
+  PRODUCT_ID_MUST_BE_STRING: 'Product id must be a string',
+  LIMIT_MUST_BE_BETWEEN_1_AND_100: 'Limit must be between 1 and 100',
+  PAGE_MUST_BE_GREATER_THAN_0: 'Page must be greater than 0'
 } as const

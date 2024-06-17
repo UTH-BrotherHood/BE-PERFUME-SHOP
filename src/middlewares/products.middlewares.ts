@@ -212,3 +212,35 @@ export const updateProductValidation = validate(
     ['body']
   )
 )
+
+export const panigationValidation = validate(
+  checkSchema(
+    {
+      limit: {
+        isNumeric: true,
+        custom: {
+          options: (value, { req }) => {
+            const num = Number(value)
+            if (num > 100 || num < 1) {
+              throw new Error(PRODUCTS_MESSAGES.LIMIT_MUST_BE_BETWEEN_1_AND_100)
+            }
+            return true
+          }
+        }
+      },
+      page: {
+        isNumeric: true,
+        custom: {
+          options: (value, { req }) => {
+            const num = Number(value)
+            if (num < 1) {
+              throw new Error(PRODUCTS_MESSAGES.PAGE_MUST_BE_GREATER_THAN_0)
+            }
+            return true
+          }
+        }
+      }
+    },
+    ['query']
+  )
+)

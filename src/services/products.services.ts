@@ -91,12 +91,26 @@ class ProductsService {
     )
   }
 
-  async getProducts() {
-    const result = await databaseServices.query(
+  async getProducts(limit: number, page: number) {
+    const offset = (page - 1) * limit
+
+    const productsResult = await databaseServices.query(
       `SELECT *
+       FROM products
+       LIMIT $1
+       OFFSET $2`,
+      [limit, offset]
+    )
+
+    const totalResult = await databaseServices.query(
+      `SELECT COUNT(*) AS total
        FROM products`
     )
-    return result.rows
+
+    return {
+      products: productsResult.rows,
+      total: parseInt(totalResult.rows[0].total, 10)
+    }
   }
 
   async getProduct(product_id: string) {
