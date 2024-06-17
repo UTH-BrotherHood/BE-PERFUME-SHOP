@@ -16,7 +16,7 @@ npm i
 
 ## Diagram
 
-[[Database Diagram]](https://drive.google.com/file/d/1k9zk4nAovzhe9ZmbbbHEmulDzb1u-Rmf/view)
+[[Database Diagram]](https://app.diagrams.net/#G1QMdPDgTlQjzktPw8Rp7oWJ2svTNksge3#%7B%22pageId%22%3A%22zRqW0jtlcMVORRDt8lwJ%22%7D)
 
 ## Hệ Quản Trị Cơ Sở Dữ Liệu
 
