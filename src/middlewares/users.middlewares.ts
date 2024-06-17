@@ -9,6 +9,8 @@ import { hashPassword } from '~/utils/crypto'
 import { verifyToken } from '~/utils/jwt'
 import { validate } from '~/utils/validation.utils'
 import { NextFunction, Request, Response } from 'express'
+import { TokenPayload } from '~/models/requests/user.requests'
+import { userVerificationStatus } from '~/constants/enums'
 const passwordShema: ParamSchema = {
   isString: {
     errorMessage: USERS_MESSAGES.PASSWORD_MUST_BE_STRING
@@ -379,3 +381,16 @@ export const resetPasswordValidation = validate(
     forgot_password_token: forgotPasswordToken
   })
 )
+
+export const verifiedUserValidation = (req: Request, res: Response, next: NextFunction) => {
+  const { verify } = req.decoded_authorization as TokenPayload
+  if (verify !== userVerificationStatus.Verified) {
+    return next(
+      new ErrorWithStatus({
+        message: USERS_MESSAGES.USER_NOT_VERIFIED,
+        status: HTTP_STATUS.FORBIDDEN
+      })
+    )
+  }
+  next()
+}
