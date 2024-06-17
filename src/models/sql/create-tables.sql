@@ -60,3 +60,14 @@ CREATE TABLE IF NOT EXISTS refresh_tokens (
     exp VARCHAR(255),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+
+-- Tạo bảng wish_list
+CREATE TABLE IF NOT EXISTS wish_list (
+    wish_list_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    product_id VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+);
