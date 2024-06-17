@@ -120,7 +120,7 @@ export const productIdValidation = validate(
         }
       }
     },
-    ['params']
+    ['params', 'body']
   )
 )
 export const updateProductValidation = validate(
