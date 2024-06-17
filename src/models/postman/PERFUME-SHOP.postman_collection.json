@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"vuong@gmail.com\",\r\n    \"username\": \"vuong\",\r\n    \"dsdsd\" : \"djfdfd\",\r\n    \"password\": \"X.hihi123123\",\r\n    \"confirm_password\" :  \"X.hihi123123\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
+							"raw": "{\r\n    \"email\": \"vuong@gmail.com\",\r\n    \"username\": \"vuong\",\r\n    \"dsdsd\" : \"djfdfd\",\r\n    \"password\": \"X.hihi123123\",\r\n    \"confirm_password\" :  \"X.hihi144423123\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -81,7 +81,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\" : \"vuong1@gmail.com\",\r\n    \"password\" : \"X.hihi123123\"\r\n}",
+							"raw": "{\r\n    \"email\" : \"{{email}}\",\r\n    \"password\" : \"{{password}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -276,6 +276,310 @@
 							"path": [
 								"users",
 								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Categories",
+			"item": [
+				{
+					"name": "create category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"guucci\",\r\n    \"description\" : 1221\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get  category detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/categories",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update category",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"sdfsdffsdfsdfdf\",\r\n    \"description\" : \"hifhihi\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/2d7a2b0f-42f6-4bcd-b8eb-1202df730279",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"2d7a2b0f-42f6-4bcd-b8eb-1202df730279"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete category",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Vuondfdfdffg1\",\r\n    \"description\" : \"hifhihi\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/categories/1d1f82d7-aafb-499b-a310-ab883f4fff89bffdf",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"categories",
+								"1d1f82d7-aafb-499b-a310-ab883f4fff89bffdf"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "create Product",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"category_id\" : \"ec88eed8-ca10-4e5b-bbd8-2011b4b7211c\",\r\n    \"name\" : \"product 1\",\r\n    \"description\" : \"hihihehe\",\r\n    \"discount\" : 0.5,\r\n    \"images\" : [\"aaaa\"],\r\n    \"stock\" : 50,\r\n    \"price\" : 70000\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/products",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products/8a1ab5c1-9955-4a34-893e-1deff51cc662",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products",
+								"8a1ab5c1-9955-4a34-893e-1deff51cc662"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update product",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{   \r\n    \"category_id\" : \"ec88eed8-ca10-4e5b-bbd8-2011b4b7211c\",\r\n    \"name\" : \"product 1 da sua 7\",\r\n    \"description\" : \"hihihehe\",\r\n    \"discount\" : 0.5,\r\n    \"images\" : [\"aaaa da sua\"],\r\n    \"stock\" : 50,\r\n    \"price\" : 70001\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/products/e8759a2b-dfec-404b-9d4f-9957df1fd373",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products",
+								"e8759a2b-dfec-404b-9d4f-9957df1fd373"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products?page=1&limit=3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get product detail",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/products/ae5415e0-171c-4d17-a6f0-215689b933f8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"products",
+								"ae5415e0-171c-4d17-a6f0-215689b933f8"
 							]
 						}
 					},
