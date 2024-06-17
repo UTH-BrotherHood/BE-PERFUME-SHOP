@@ -46,7 +46,9 @@ export const USERS_MESSAGES = {
   // resetPassword
   RESET_PASSWORD_SUCCESSFULLY: 'Reset password successfully',
   // get me
-  GET_ME_SUCCESSFULLY: 'Get me successfully'
+  GET_ME_SUCCESSFULLY: 'Get me successfully',
+  // user not verified
+  USER_NOT_VERIFIED: 'User not verified'
 } as const
 
 export const CATEGORY_MESSAGES = {
@@ -94,4 +96,16 @@ export const PRODUCTS_MESSAGES = {
   PRODUCT_ID_MUST_BE_STRING: 'Product id must be a string',
   LIMIT_MUST_BE_BETWEEN_1_AND_100: 'Limit must be between 1 and 100',
   PAGE_MUST_BE_GREATER_THAN_0: 'Page must be greater than 0'
+} as const
+
+export const WISHLIST_MESSAGES = {
+  ADD_TO_WISHLIST_SUCCESSFULLY: 'Add to wishlist successfully',
+  GET_WISHLIST_SUCCESSFULLY: 'Get wishlist successfully',
+  DELETE_FROM_WISHLIST_SUCCESSFULLY: 'Delete from wishlist successfully',
+  WISHLIST_NOT_FOUND: 'Wishlist not found',
+  WISHLIST_ID_REQUIRED: 'Wishlist id is required',
+  WISHLIST_ID_MUST_BE_STRING: 'Wishlist id must be a string',
+  WISHLIST_REQUIRED: 'Wishlist is required',
+  WISHLIST_MUST_BE_STRING: 'Wishlist must be a string',
+  WISHLIST_ALREADY_EXIST: 'Wishlist already exists'
 } as const
