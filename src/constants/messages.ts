@@ -127,7 +127,9 @@ export const ORDERS_MESSAGES = {
 } as const
 
 export const PAYMENTS_MESSAGES = {
-  CREATE_PAYMENT_METHOD_SUCCESSFULLY: 'Create payment method successfully'
+  CREATE_PAYMENT_METHOD_SUCCESSFULLY: 'Create payment method successfully',
+  PAYMENT_METHOD_REQUIRED: 'Payment method is required',
+  PAYMENT_METHOD_MUST_BE_STRING: 'Payment method must be a string'
 } as const
 
 export const SHIPPING_ADDRESS_MESSAGES = {

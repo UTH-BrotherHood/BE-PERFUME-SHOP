@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import { createPaymentMethodcontroller } from '~/controllers/payments.controllers'
+import { createPaymentMethodValidation } from '~/middlewares/payments.middleware'
 import { accessTokenValidation, verifiedUserValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -16,6 +17,7 @@ paymentRouters.post(
   '/',
   accessTokenValidation,
   verifiedUserValidation,
+  createPaymentMethodValidation,
   wrapRequestHandler(createPaymentMethodcontroller)
 )
 
