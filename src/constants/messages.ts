@@ -116,3 +116,12 @@ export const CARTS_MESSAGES = {
   DELETE_FROM_CART_SUCCESSFULLY: 'Delete from cart successfully',
   CHANGE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESSFULLY: 'Change quantity of product in cart successfully'
 } as const
+
+export const ORDERS_MESSAGES = {
+  CREATE_ORDER_SUCCESSFULLY: 'Create order successfully',
+  CART_IS_EMPTY: 'Cart is empty, please add product to cart before buying',
+  ADDRESS_ID_REQUIRED: 'Address id is required',
+  ADDRESS_ID_MUST_BE_STRING: 'Address id must be a string',
+  PAYMENT_ID_REQUIRED: 'Payment id is required',
+  PAYMENT_ID_MUST_BE_STRING: 'Payment id must be a string'
+} as const
