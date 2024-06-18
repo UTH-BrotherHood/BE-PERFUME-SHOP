@@ -132,6 +132,9 @@ export const PAYMENTS_MESSAGES = {
 
 export const SHIPPING_ADDRESS_MESSAGES = {
   CREATE_SHIPPING_ADDRESS_SUCCESSFULLY: 'Create shipping address successfully',
+  UPDATE_SHIPPING_ADDRESS_SUCCESSFULLY: 'Update shipping address successfully',
+  GET_SHIPPING_ADDRESS_DETAILS_SUCCESSFULLY: 'Get shipping address details successfully',
+  GET_ALL_SHIPPING_ADDRESS_SUCCESSFULLY: 'Get all shipping address successfully',
   FULL_NAME_REQUIRED: 'Full name is required',
   FULL_NAME_MUST_BE_STRING: 'Full name must be a string',
   PHONE_NUMBER_REQUIRED: 'Phone number is required',

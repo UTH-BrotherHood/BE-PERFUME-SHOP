@@ -25,3 +25,36 @@ export const createShippingAddressController = async (
     result
   })
 }
+
+export const updateShippingAddressController = async (
+  req: Request<ParamsDictionary, any, ShippingAddressReqBody>,
+  res: Response
+) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const { address_id } = req.params
+  const result = await shippingAddressService.updateShippingAddress(user_id, address_id, req.body)
+
+  return res.json({
+    message: SHIPPING_ADDRESS_MESSAGES.UPDATE_SHIPPING_ADDRESS_SUCCESSFULLY,
+    result
+  })
+}
+
+export const getShippingAddressDetailsController = async (req: Request<ParamsDictionary>, res: Response) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const { address_id } = req.params
+  const result = await shippingAddressService.getShippingAddressDetails(user_id, address_id)
+  return res.json({
+    message: SHIPPING_ADDRESS_MESSAGES.GET_SHIPPING_ADDRESS_DETAILS_SUCCESSFULLY,
+    result
+  })
+}
+
+export const getShippingAddressController = async (req: Request<ParamsDictionary>, res: Response) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const result = await shippingAddressService.getShippingAddress(user_id)
+  return res.json({
+    message: SHIPPING_ADDRESS_MESSAGES.GET_ALL_SHIPPING_ADDRESS_SUCCESSFULLY,
+    result
+  })
+}
