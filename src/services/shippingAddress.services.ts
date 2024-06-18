@@ -1,6 +1,8 @@
 import { ShippingAddressReqBody } from '~/models/requests/shippingAddress.requests'
 import databaseServices from './database.services'
 import { v4 as uuidv4 } from 'uuid'
+import { ErrorWithStatus } from '~/models/errors'
+import HTTP_STATUS from '~/constants/httpStatus'
 
 class ShippingAddressService {
   async createShippingAddress({
@@ -29,6 +31,18 @@ class ShippingAddressService {
   }
 
   async getShippingAddressDetails(user_id: string, address_id: string) {
+    // Lấy thông tin hiện tại của địa chỉ giao hàng
+    const currentAddress = await databaseServices.query(
+      `SELECT * FROM shipping_address WHERE id = $1 and user_id = $2;`,
+      [address_id, user_id]
+    )
+
+    if (currentAddress.rows.length === 0) {
+      throw new ErrorWithStatus({
+        status: HTTP_STATUS.NOT_FOUND,
+        message: 'address_id not found'
+      })
+    }
     const result = await databaseServices.query(`SELECT * FROM shipping_address WHERE id = $1 and user_id = $2;`, [
       address_id,
       user_id
@@ -46,7 +60,10 @@ class ShippingAddressService {
     const currentAddress = await databaseServices.query(`SELECT * FROM shipping_address WHERE id = $1`, [address_id])
 
     if (currentAddress.rows.length === 0) {
-      throw new Error('Address not found')
+      throw new ErrorWithStatus({
+        status: HTTP_STATUS.NOT_FOUND,
+        message: 'address_id not found'
+      })
     }
 
     const address = currentAddress.rows[0]

@@ -5,7 +5,7 @@ import {
   getShippingAddressDetailsController,
   updateShippingAddressController
 } from '~/controllers/shippingAddress.controllers'
-import { createShippingAddress } from '~/middlewares/shippingAddress.middlewares'
+import { createShippingAddress, updateShippingAddressValidation } from '~/middlewares/shippingAddress.middlewares'
 import { accessTokenValidation, verifiedUserValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
 
@@ -33,7 +33,13 @@ Headers: { Authorization : Bearer <accessToken> }
 Method: PATCH
 Body : ShippingAddressReqBody
 */
-shippingAddressRouters.patch('/:address_id', accessTokenValidation, wrapRequestHandler(updateShippingAddressController))
+shippingAddressRouters.patch(
+  '/:address_id',
+  accessTokenValidation,
+  verifiedUserValidation,
+  updateShippingAddressValidation,
+  wrapRequestHandler(updateShippingAddressController)
+)
 
 /*
 Description: get shipping address details
