@@ -27,3 +27,15 @@ export const getAllOrderscontroller = async (req: Request<ParamsDictionary, any,
     result
   })
 }
+
+export const getOrderDetailcontroller = async (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const { order_id } = req.params
+
+  const result = await ordersService.getOrderDetail(user_id, order_id)
+
+  return res.json({
+    message: ORDERS_MESSAGES.GET_ORDER_DETAIL_SUCCESSFULLY,
+    result
+  })
+}
