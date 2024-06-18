@@ -71,3 +71,58 @@ CREATE TABLE IF NOT EXISTS wish_list (
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (product_id) REFERENCES products (id)
 );
+
+
+-- Tạo bảng payment
+CREATE TABLE IF NOT EXISTS payment (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    payment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_method VARCHAR(100) NOT NULL,
+    amount NUMERIC(10, 2) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Tạo bảng shipping_address
+CREATE TABLE IF NOT EXISTS shipping_address (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    full_name VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(50) NOT NULL,
+    address_line VARCHAR(255) NOT NULL,
+    city VARCHAR(100) NOT NULL,
+    country VARCHAR(100) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
+
+-- Tạo bảng orders
+CREATE TABLE IF NOT EXISTS orders (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    user_id VARCHAR(255) NOT NULL,
+    payment_id VARCHAR(255) NOT NULL,
+    total_price NUMERIC(10, 2) NOT NULL,
+    order_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    address_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (payment_id) REFERENCES payment (id),
+    FOREIGN KEY (address_id) REFERENCES shipping_address (id)
+);
+
+
+-- Tạo bảng order_item
+CREATE TABLE IF NOT EXISTS order_item (
+    id VARCHAR(255) NOT NULL PRIMARY KEY,
+    order_id VARCHAR(255) NOT NULL,
+    product_id VARCHAR(255) NOT NULL,
+    price NUMERIC(10, 2) NOT NULL,
+    quantity INTEGER NOT NULL,
+    discount FLOAT,
+    FOREIGN KEY (order_id) REFERENCES orders (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+);
+
+
+
+
