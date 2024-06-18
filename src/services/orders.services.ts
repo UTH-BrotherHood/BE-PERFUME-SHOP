@@ -74,6 +74,11 @@ class OrdersService {
 
     return result.rows[0]
   }
+
+  async getAllOrders(user_id: string) {
+    const result = await databaseServices.query(`SELECT * FROM orders WHERE user_id = $1`, [user_id])
+    return result.rows
+  }
 }
 
 const ordersService = new OrdersService()

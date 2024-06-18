@@ -16,3 +16,14 @@ export const createOrdercontroller = async (req: Request<ParamsDictionary, any, 
     result
   })
 }
+
+export const getAllOrderscontroller = async (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+
+  const result = await ordersService.getAllOrders(user_id)
+
+  return res.json({
+    message: ORDERS_MESSAGES.GET_ORDERS_SUCCESSFULLY,
+    result
+  })
+}

@@ -123,7 +123,8 @@ export const ORDERS_MESSAGES = {
   ADDRESS_ID_REQUIRED: 'Address id is required',
   ADDRESS_ID_MUST_BE_STRING: 'Address id must be a string',
   PAYMENT_ID_REQUIRED: 'Payment id is required',
-  PAYMENT_ID_MUST_BE_STRING: 'Payment id must be a string'
+  PAYMENT_ID_MUST_BE_STRING: 'Payment id must be a string',
+  GET_ORDERS_SUCCESSFULLY: 'Get orders successfully'
 } as const
 
 export const PAYMENTS_MESSAGES = {

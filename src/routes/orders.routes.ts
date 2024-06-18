@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import {} from '~/controllers/carts.controllers'
-import { createOrdercontroller } from '~/controllers/orders.controllers'
+import { createOrdercontroller, getAllOrderscontroller } from '~/controllers/orders.controllers'
 import { createOrderValidation } from '~/middlewares/orders.middlewares'
 import { accessTokenValidation, verifiedUserValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
@@ -21,5 +21,13 @@ ordersRouters.post(
   createOrderValidation,
   wrapRequestHandler(createOrdercontroller)
 )
+
+/**
+ * Description: get all orders
+ * Path: /
+ * Method: POST
+ * Header: {Authorization: Bearer token}
+ */
+ordersRouters.get('/', accessTokenValidation, verifiedUserValidation, wrapRequestHandler(getAllOrderscontroller))
 
 export default ordersRouters
