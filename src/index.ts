@@ -7,6 +7,7 @@ import { defaultErrorHandler } from '~/middlewares/error.middlewares'
 import categoriesRouter from './routes/categories.routes'
 import productsRouters from './routes/products.routes'
 import wishlistRouters from './routes/wishlist.routes'
+import cartsRouters from './routes/carts.routes'
 
 config()
 // const databaseServices
@@ -25,6 +26,8 @@ app.use('/categories', categoriesRouter)
 app.use('/products', productsRouters)
 // Routes for wishlist
 app.use('/wishlist', wishlistRouters)
+// Routes for cart
+app.use('/cart', cartsRouters)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check

@@ -109,3 +109,10 @@ export const WISHLIST_MESSAGES = {
   WISHLIST_MUST_BE_STRING: 'Wishlist must be a string',
   WISHLIST_ALREADY_EXIST: 'Wishlist already exists'
 } as const
+
+export const CARTS_MESSAGES = {
+  ADD_TO_CART_SUCCESSFULLY: 'Add to cart successfully',
+  GET_CART_SUCCESSFULLY: 'Get cart successfully',
+  DELETE_FROM_CART_SUCCESSFULLY: 'Delete from cart successfully',
+  CHANGE_QUANTITY_OF_PRODUCT_IN_CART_SUCCESSFULLY: 'Change quantity of product in cart successfully'
+} as const

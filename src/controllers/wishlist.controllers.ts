@@ -12,8 +12,6 @@ export const addToWishlistcontroller = async (
 ) => {
   const { user_id } = req.decoded_authorization as TokenPayload
   const product_id = req.body.product_id
-  console.log('user_id', user_id)
-  console.log('product_id', product_id)
   const result = await wishlistService.addToWishlist(user_id, product_id)
   return res.json({
     message: WISHLIST_MESSAGES.ADD_TO_WISHLIST_SUCCESSFULLY,
