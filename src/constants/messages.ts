@@ -125,3 +125,21 @@ export const ORDERS_MESSAGES = {
   PAYMENT_ID_REQUIRED: 'Payment id is required',
   PAYMENT_ID_MUST_BE_STRING: 'Payment id must be a string'
 } as const
+
+export const PAYMENTS_MESSAGES = {
+  CREATE_PAYMENT_METHOD_SUCCESSFULLY: 'Create payment method successfully'
+} as const
+
+export const SHIPPING_ADDRESS_MESSAGES = {
+  CREATE_SHIPPING_ADDRESS_SUCCESSFULLY: 'Create shipping address successfully',
+  FULL_NAME_REQUIRED: 'Full name is required',
+  FULL_NAME_MUST_BE_STRING: 'Full name must be a string',
+  PHONE_NUMBER_REQUIRED: 'Phone number is required',
+  PHONE_NUMBER_MUST_BE_STRING: 'Phone number must be a string',
+  ADDRESS_LINE_REQUIRED: 'Address line is required',
+  ADDRESS_LINE_MUST_BE_STRING: 'Address line must be a string',
+  CITY_REQUIRED: 'City is required',
+  CITY_MUST_BE_STRING: 'City must be a string',
+  COUNTRY_REQUIRED: 'Country is required',
+  COUNTRY_MUST_BE_STRING: 'Country must be a string'
+} as const

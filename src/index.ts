@@ -9,6 +9,8 @@ import productsRouters from './routes/products.routes'
 import wishlistRouters from './routes/wishlist.routes'
 import cartsRouters from './routes/carts.routes'
 import ordersRouters from './routes/orders.routes'
+import paymentRouters from './routes/payments.routes'
+import shippingAddressRouters from './routes/shippingAddress.routes'
 
 config()
 // const databaseServices
@@ -29,8 +31,12 @@ app.use('/products', productsRouters)
 app.use('/wishlist', wishlistRouters)
 // Routes for cart
 app.use('/cart', cartsRouters)
+// Routes for payment
+app.use('/payment', paymentRouters)
 // Routes for orders
 app.use('/orders', ordersRouters)
+// Routes for shippingAddress
+app.use('/shipping-address', shippingAddressRouters)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check
