@@ -154,8 +154,12 @@ class UsersService {
         VALUES ($1, $2, $3, $4)`,
       [user_id, refresh_token, iat, exp]
     )
-
-    return { access_token, refresh_token }
+    const user = await databaseServices.query(
+      `SELECT email, username, phone_number, date_of_birth, avatar FROM users WHERE id = $1`,
+      [user_id]
+    )
+    const userInfo = user.rows[0]
+    return { access_token, refresh_token, userInfo }
   }
 
   async logout(refresh_token: string) {
