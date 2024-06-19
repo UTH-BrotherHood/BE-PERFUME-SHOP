@@ -1,5 +1,3 @@
-import { Pool } from 'pg'
-import { config } from 'dotenv'
 import { tokenType, userVerificationStatus } from '~/constants/enums'
 import { signToken, verifyToken } from '~/utils/jwt'
 import { RegisterReqBody } from '~/models/requests/user.requests'
@@ -8,16 +6,8 @@ import { hashPassword } from '~/utils/crypto'
 import { v4 as uuidv4 } from 'uuid'
 import User from '~/models/schemas/user.schemas'
 import { USERS_MESSAGES } from '~/constants/messages'
-config()
-
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-})
-
+import { envConfig } from '~/constants/config'
+import { sendForgotPassWordEmail, sendVerifyRegisterEmail } from '~/utils/email'
 class UsersService {
   private signAccessToken({ user_id, verify }: { user_id: string; verify: userVerificationStatus }) {
     return signToken({
@@ -26,9 +16,9 @@ class UsersService {
         token_type: tokenType.AccessToken,
         verify
       },
-      privateKey: process.env.JWT_SECRET_ACCESS_TOKEN as string,
+      privateKey: envConfig.jwtSecretAccessToken,
       options: {
-        expiresIn: process.env.ACCESS_EXPIRES_IN
+        expiresIn: envConfig.jwtExpiresIn
       }
     })
   }
@@ -49,7 +39,7 @@ class UsersService {
           verify,
           exp
         },
-        privateKey: process.env.JWT_SECRET_REFRESH_TOKEN as string
+        privateKey: envConfig.jwtSecretRefreshToken
       })
     }
     return signToken({
@@ -58,9 +48,9 @@ class UsersService {
         token_type: tokenType.RefreshToken,
         verify
       },
-      privateKey: process.env.JWT_SECRET_REFRESH_TOKEN as string,
+      privateKey: envConfig.jwtSecretRefreshToken,
       options: {
-        expiresIn: process.env.REFRESH_EXPIRES_IN
+        expiresIn: envConfig.jwtRefreshExpiresIn
       }
     })
   }
@@ -71,9 +61,9 @@ class UsersService {
         token_type: tokenType.EmailVerificationToken,
         verify
       },
-      privateKey: process.env.JWT_SECRET_EMAIL_VERIFY_TOKEN as string,
+      privateKey: envConfig.jwtSecretEmailVerifyToken,
       options: {
-        expiresIn: process.env.EMAIL_VERIFY_TOKEN_EXPIRES_IN
+        expiresIn: envConfig.jwtEmailVerifyExpiresIn
       }
     })
   }
@@ -84,9 +74,9 @@ class UsersService {
         token_type: tokenType.EmailVerificationToken,
         verify
       },
-      privateKey: process.env.JWT_SECRET_FORGOT_PASSWORD_TOKEN as string,
+      privateKey: envConfig.jwtSecretForgotPassToken,
       options: {
-        expiresIn: process.env.FORGOT_PASSWORD_TOKEN_EXPIRES_IN
+        expiresIn: envConfig.jwtForgotPassExpiresIn
       }
     })
   }
@@ -97,7 +87,7 @@ class UsersService {
   private decodeRefreshToken(refresh_token: string) {
     return verifyToken({
       token: refresh_token,
-      secretOrPublickey: process.env.JWT_SECRET_REFRESH_TOKEN as string
+      secretOrPublickey: envConfig.jwtSecretRefreshToken
     })
   }
   async register(payload: RegisterReqBody) {
@@ -119,7 +109,7 @@ class UsersService {
       VALUES ($1, $2, $3, $4, $5, $6, $7)`,
       [
         user_id,
-        user.name || '',
+        user.name,
         user.email,
         hashed_password,
         email_verify_token,
@@ -140,7 +130,8 @@ class UsersService {
          VALUES ($1, $2, $3, $4)`,
       [user_id, refresh_token, iat, exp]
     )
-
+    console.log(user.email, user.name)
+    await sendVerifyRegisterEmail(user.email, user.name, email_verify_token)
     console.log('email_verification_token : ', email_verify_token)
     return { access_token, refresh_token }
   }
@@ -233,12 +224,12 @@ class UsersService {
     }
   }
 
-  async resendVerifyEmail(user_id: string) {
+  async resendVerifyEmail(user_id: string, email: string, name: string) {
     const email_verify_token = await this.signEmailVerifyToken({
       user_id,
       verify: userVerificationStatus.Verified
     })
-
+    await sendVerifyRegisterEmail(email, name, email_verify_token)
     console.log('Resend email verify token : ', email_verify_token)
 
     // cập nhật email_verification_token người dùng
@@ -255,7 +246,17 @@ class UsersService {
     }
   }
 
-  async forgotPassword({ user_id, verify }: { user_id: string; verify: userVerificationStatus }) {
+  async forgotPassword({
+    user_id,
+    verify,
+    email,
+    name
+  }: {
+    user_id: string
+    verify: userVerificationStatus
+    email: string
+    name: string
+  }) {
     const forgot_password_token = await this.signForgotPasswordToken({
       user_id,
       verify
@@ -272,6 +273,7 @@ class UsersService {
 
     // Gửi email chứa link reset password đến email của user ví dụ (nhưng mà chưa làm được nên còn sơ lốc vậy ...):
     //http://localhost:3000/forgot-password?token=forgot_password_token
+    sendForgotPassWordEmail(email, name, forgot_password_token)
     console.log('Forgot password token : ', forgot_password_token)
 
     return {
