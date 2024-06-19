@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"xuannvuongg+7@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"X.hihi123123cc\",\r\n    \"confirm_password\" :  \"X.hihi123123cc\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
+							"raw": "{\r\n    \"email\": \"xuannvuongg+71@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"X.hihi123123cc\",\r\n    \"confirm_password\" :  \"X.hihi123123cc\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -207,7 +207,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"vuong5@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"email\": \"xuannvuongg+7@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
