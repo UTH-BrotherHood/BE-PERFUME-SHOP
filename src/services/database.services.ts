@@ -1,19 +1,18 @@
 import { Pool } from 'pg'
-import { config } from 'dotenv'
 import fs from 'fs'
 import path from 'path'
-config()
+import { envConfig } from '~/constants/config'
 
 class DatabaseServices {
   private pool: Pool
 
   constructor() {
     this.pool = new Pool({
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      user: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME
+      host: envConfig.dbHost,
+      port: envConfig.dbPort,
+      user: envConfig.dbUserName,
+      password: envConfig.dbPassword,
+      database: envConfig.dbName
     })
     this.createTables()
   }

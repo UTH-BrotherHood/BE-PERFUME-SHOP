@@ -1,5 +1,3 @@
-import { Pool } from 'pg'
-import { config } from 'dotenv'
 import databaseServices from './database.services'
 import { v4 as uuidv4 } from 'uuid'
 import Category from '~/models/schemas/category.schemas'
@@ -7,16 +5,6 @@ import { CategoryReqBody } from '~/models/requests/category.requests'
 import { ErrorWithStatus } from '~/models/errors'
 import HTTP_STATUS from '~/constants/httpStatus'
 import { CATEGORY_MESSAGES } from '~/constants/messages'
-config()
-
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-})
-
 class CategoriesService {
   async checkCategoryExist(id: string) {
     const result = await databaseServices.query(

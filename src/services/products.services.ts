@@ -1,21 +1,7 @@
-import { Pool } from 'pg'
-import { config } from 'dotenv'
 import databaseServices from './database.services'
 import { v4 as uuidv4 } from 'uuid'
-import Category from '~/models/schemas/category.schemas'
-import { CategoryReqBody } from '~/models/requests/category.requests'
 import Product from '~/models/schemas/product.shemas'
 import { ProductReqBody, UpdateProductReqBody } from '~/models/requests/product.requests'
-config()
-
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: Number(process.env.DB_PORT),
-  user: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME
-})
-
 class ProductsService {
   async checkProductExistByName(name: string) {
     const result = await databaseServices.query(

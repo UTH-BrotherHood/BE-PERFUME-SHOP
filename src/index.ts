@@ -1,4 +1,3 @@
-import { config } from 'dotenv'
 import express from 'express'
 import cors from 'cors'
 import databaseServices from '~/services/database.services'
@@ -11,14 +10,14 @@ import cartsRouters from './routes/carts.routes'
 import ordersRouters from './routes/orders.routes'
 import paymentRouters from './routes/payments.routes'
 import shippingAddressRouters from './routes/shippingAddress.routes'
+import { envConfig } from './constants/config'
 
-config()
 // const databaseServices
 databaseServices.connect()
 
 const app = express()
 app.use(cors())
-const port = process.env.PORT || 4000
+const port = envConfig.port
 // Middlewares for parsing body
 app.use(express.json())
 // Routes for users
