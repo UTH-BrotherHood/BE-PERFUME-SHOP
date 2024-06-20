@@ -44,10 +44,9 @@ productsRouters.delete(
  * Description: Get all products
  * Path: /
  * Method: GET
- * Header: {Authorization?: Bearer <access_token> }
  */
 
-productsRouters.get('/', accessTokenValidation, panigationValidation, wrapRequestHandler(getProductsController))
+productsRouters.get('/', panigationValidation, wrapRequestHandler(getProductsController))
 
 /**
  * Description: Get product details
