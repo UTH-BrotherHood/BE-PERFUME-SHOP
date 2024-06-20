@@ -55,12 +55,7 @@ productsRouters.get('/', panigationValidation, wrapRequestHandler(getProductsCon
  * Header: {Authorization?: Bearer <access_token> }
  */
 
-productsRouters.get(
-  '/:product_id',
-  accessTokenValidation,
-  productIdValidation,
-  wrapRequestHandler(getProductController)
-)
+productsRouters.get('/:product_id', productIdValidation, wrapRequestHandler(getProductController))
 
 /*
 Description: Update product
