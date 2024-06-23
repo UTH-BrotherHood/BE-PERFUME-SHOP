@@ -13,12 +13,6 @@ const searchRouters = Router()
  * Body : { tweet_id : string}
  * Header: {Authorization: Bearer token}
  */
-searchRouters.get(
-  '/',
-  accessTokenValidation,
-  verifiedUserValidation,
-  searchValidation,
-  wrapRequestHandler(searchController)
-)
+searchRouters.get('/', verifiedUserValidation, searchValidation, wrapRequestHandler(searchController))
 
 export default searchRouters

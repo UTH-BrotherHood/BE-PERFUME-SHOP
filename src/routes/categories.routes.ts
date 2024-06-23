@@ -71,6 +71,6 @@ categoriesRouter.delete(
  * Header: {Authorization?: Bearer <access_token> }
  */
 
-categoriesRouter.get('/', accessTokenValidation, wrapRequestHandler(getCategoriesController))
+categoriesRouter.get('/', wrapRequestHandler(getCategoriesController))
 
 export default categoriesRouter
