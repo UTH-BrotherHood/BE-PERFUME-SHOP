@@ -304,9 +304,21 @@ class UsersService {
 
   async getMe(user_id: string) {
     const userQuery = await databaseServices.query(
-      `SELECT id, username, email, phone_number, date_of_birth, created_at, updated_at, verify, avatar, cart_id
-       FROM users
-       WHERE id = $1`,
+      `SELECT u.id, u.username, u.email, u.phone_number, u.date_of_birth, u.created_at, u.updated_at, u.verify, u.avatar,
+              COALESCE(cart_totals.total_cart_quantity, 0) AS total_cart_quantity,
+              COALESCE(wishlist_totals.total_wishlist_quantity, 0) AS total_wishlist_quantity
+       FROM users u
+       LEFT JOIN (
+           SELECT user_id, SUM(quantity) AS total_cart_quantity
+           FROM carts
+           GROUP BY user_id
+       ) cart_totals ON u.id = cart_totals.user_id
+       LEFT JOIN (
+           SELECT user_id, COUNT(product_id) AS total_wishlist_quantity
+           FROM wish_list
+           GROUP BY user_id
+       ) wishlist_totals ON u.id = wishlist_totals.user_id
+       WHERE u.id = $1`,
       [user_id]
     )
 
