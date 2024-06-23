@@ -1150,6 +1150,66 @@
 			]
 		},
 		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "search product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/search?content=product",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"search"
+							],
+							"query": [
+								{
+									"key": "content",
+									"value": "product"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "health-check",
 			"request": {
 				"method": "GET",

@@ -11,6 +11,7 @@ import ordersRouters from './routes/orders.routes'
 import paymentRouters from './routes/payments.routes'
 import shippingAddressRouters from './routes/shippingAddress.routes'
 import { envConfig } from './constants/config'
+import searchRouters from './routes/search.routes'
 
 // const databaseServices
 databaseServices.connect()
@@ -36,6 +37,8 @@ app.use('/payment', paymentRouters)
 app.use('/orders', ordersRouters)
 // Routes for shippingAddress
 app.use('/shipping-address', shippingAddressRouters)
+// Routes for search
+app.use('/search', searchRouters)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check

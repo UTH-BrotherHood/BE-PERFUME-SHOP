@@ -150,3 +150,8 @@ export const SHIPPING_ADDRESS_MESSAGES = {
   COUNTRY_REQUIRED: 'Country is required',
   COUNTRY_MUST_BE_STRING: 'Country must be a string'
 } as const
+
+export const SEARCH_MESSAGES = {
+  SEARCH_SUCCESSFULLY: 'Search successfully',
+  CONTENT_MUST_BE_A_STRING: 'Content must be a string'
+} as const
