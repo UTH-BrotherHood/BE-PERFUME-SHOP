@@ -1,5 +1,9 @@
 import { Router } from 'express'
-import { addToWishlistcontroller, deleteFromWishlistcontroller } from '~/controllers/wishlist.controllers'
+import {
+  addToWishlistcontroller,
+  deleteFromWishlistcontroller,
+  getWishlistController
+} from '~/controllers/wishlist.controllers'
 import { productIdValidation } from '~/middlewares/products.middlewares'
 import { accessTokenValidation, verifiedUserValidation } from '~/middlewares/users.middlewares'
 import { wrapRequestHandler } from '~/utils/handlers'
@@ -35,5 +39,13 @@ wishlistRouters.delete(
   productIdValidation,
   wrapRequestHandler(deleteFromWishlistcontroller)
 )
+
+/**
+ * Description: get all wishlist
+ * Path: /
+ * Method: GET
+ * Header: {Authorization: Bearer token}
+ */
+wishlistRouters.get('/', accessTokenValidation, verifiedUserValidation, wrapRequestHandler(getWishlistController))
 
 export default wishlistRouters

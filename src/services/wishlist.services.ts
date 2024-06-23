@@ -57,6 +57,28 @@ class WishlistService {
     )
     return result.rows[0]
   }
+
+  async getWishlist(user_id: string) {
+    const result = await databaseServices.query(
+      `SELECT 
+        products.id, 
+        products.name, 
+        products.price, 
+        products.discount, 
+        products.stock
+      FROM 
+        wish_list 
+      JOIN 
+        products 
+      ON 
+        wish_list.product_id = products.id
+      WHERE 
+        user_id = $1;`,
+      [user_id]
+    )
+
+    return result.rows
+  }
 }
 
 const wishlistService = new WishlistService()

@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"xuannvuongg+71@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"X.hihi123123cc\",\r\n    \"confirm_password\" :  \"X.hihi123123cc\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
+							"raw": "{\r\n    \"email\": \"xuannvuongg+24@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"X.hihi123\",\r\n    \"confirm_password\" :  \"X.hihi123\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email_verify_token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiY2U5N2Y2Y2UtMDAwZi00OTAwLTg1ZjMtOTQ1MTJiYjYyYTkxIiwidG9rZW5fdHlwZSI6IkVtYWlsVmVyaWZpY2F0aW9uVG9rZW4iLCJ2ZXJpZnkiOiJVbnZlcmlmaWVkIiwiaWF0IjoxNzE4NjMyNzIyLCJleHAiOjE3MTg3MTkxMjJ9.VASmXa8wPW0R_HtY-NKMWZsaPrAvaZQjj6kyKvBw42U\"\r\n}",
+							"raw": "{\r\n    \"email_verify_token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTc4NTAwYTItYTRlNi00NzFiLWI2NjItYjBhZTQ5MDMxODhkIiwidG9rZW5fdHlwZSI6IkVtYWlsVmVyaWZpY2F0aW9uVG9rZW4iLCJ2ZXJpZnkiOiJWZXJpZmllZCIsImlhdCI6MTcxOTEzODQ4MywiZXhwIjoxNzE5MjI0ODgzfQ.2XhAeSZZ7zaU6drLpKMe5vk8wl01DeF2bkfsDm11c6U\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -485,7 +485,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{   \r\n    \"category_id\" : \"ec88eed8-ca10-4e5b-bbd8-2011b4b7211c\",\r\n    \"name\" : \"product 2\",\r\n    \"description\" : \"hihihehe\",\r\n    \"discount\" : 0.5,\r\n    \"images\" : [\"aaaa\"],\r\n    \"stock\" : 50,\r\n    \"price\" : 5000\r\n\r\n}",
+							"raw": "{   \r\n    \"category_id\" : \"ec88eed8-ca10-4e5b-bbd8-2011b4b7211c\",\r\n    \"name\" : \"product52\",\r\n    \"description\" : \"hihihehe\",\r\n    \"discount\" : 0.5,\r\n    \"images\" : [\"aaaa\"],\r\n    \"stock\" : 50,\r\n    \"price\" : 5000\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -648,7 +648,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\" : \"d8c05c72-338d-456c-8e63-4c660fc23d55\"\r\n}",
+							"raw": "{\r\n    \"product_id\" : \"62067927-5cc8-4bb0-9095-162e85ea1bfe\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -684,13 +684,30 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\" : \"d8c05c72-338d-456c-8e63-4c660fc23d55\"\r\n}",
+							"raw": "{\r\n    \"product_id\" : \"62067927-5cc8-4bb0-9095-162e85ea1bfe\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
+						"url": {
+							"raw": "{{host}}/wishlist",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"wishlist"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get wishlist",
+					"request": {
+						"method": "GET",
+						"header": [],
 						"url": {
 							"raw": "{{host}}/wishlist",
 							"host": [
@@ -747,7 +764,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\" : \"e8759a2b-dfec-404b-9d4f-9957df1fd373\",\r\n    \"quantity\" : \"2\"\r\n}",
+							"raw": "{\r\n    \"product_id\" : \"d8c05c72-338d-456c-8e63-4c660fc23d55\",\r\n    \"quantity\" : \"2\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

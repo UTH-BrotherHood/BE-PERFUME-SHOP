@@ -32,3 +32,16 @@ export const deleteFromWishlistcontroller = async (
     result
   })
 }
+
+export const getWishlistController = async (
+  req: Request<ParamsDictionary, any, any>,
+  res: Response,
+  next: NextFunction
+) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  const result = await wishlistService.getWishlist(user_id)
+  return res.json({
+    message: WISHLIST_MESSAGES.GET_WISHLIST_SUCCESSFULLY,
+    result
+  })
+}
