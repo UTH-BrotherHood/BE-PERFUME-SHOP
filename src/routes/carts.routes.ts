@@ -59,7 +59,7 @@ cartsRouters.patch(
 /**
  * Description: get cart details
  * Path: /
- * Method: POST
+ * Method: GET
  * Header: {Authorization: Bearer token}
  */
 cartsRouters.get('/', accessTokenValidation, verifiedUserValidation, wrapRequestHandler(getCartcontroller))
