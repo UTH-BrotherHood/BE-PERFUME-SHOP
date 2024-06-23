@@ -154,10 +154,25 @@ class UsersService {
         VALUES ($1, $2, $3, $4)`,
       [user_id, refresh_token, iat, exp]
     )
-    const user = await databaseServices.query(
-      `SELECT email, username, phone_number, date_of_birth, avatar FROM users WHERE id = $1`,
+    const user = await await databaseServices.query(
+      `SELECT u.id, u.username, u.email, u.phone_number, u.date_of_birth, u.created_at, u.updated_at, u.verify, u.avatar,
+              COALESCE(cart_totals.total_cart_quantity, 0) AS total_cart_quantity,
+              COALESCE(wishlist_totals.total_wishlist_quantity, 0) AS total_wishlist_quantity
+       FROM users u
+       LEFT JOIN (
+           SELECT user_id, SUM(quantity) AS total_cart_quantity
+           FROM carts
+           GROUP BY user_id
+       ) cart_totals ON u.id = cart_totals.user_id
+       LEFT JOIN (
+           SELECT user_id, COUNT(product_id) AS total_wishlist_quantity
+           FROM wish_list
+           GROUP BY user_id
+       ) wishlist_totals ON u.id = wishlist_totals.user_id
+       WHERE u.id = $1`,
       [user_id]
     )
+
     const userInfo = user.rows[0]
     return { access_token, refresh_token, userInfo }
   }
