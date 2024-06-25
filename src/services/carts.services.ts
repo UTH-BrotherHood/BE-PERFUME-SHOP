@@ -111,6 +111,7 @@ class CartsService {
         products.price, 
         products.discount, 
         products.stock, 
+        products.images,
         carts.quantity
       FROM 
         carts 
