@@ -65,7 +65,8 @@ class WishlistService {
         products.name, 
         products.price, 
         products.discount, 
-        products.stock
+        products.stock,
+        products.images
       FROM 
         wish_list 
       JOIN 
