@@ -12,6 +12,7 @@ import paymentRouters from './routes/payments.routes'
 import shippingAddressRouters from './routes/shippingAddress.routes'
 import { envConfig } from './constants/config'
 import searchRouters from './routes/search.routes'
+import dashboardRouters from './routes/dashboard.routes'
 
 // const databaseServices
 databaseServices.connect()
@@ -39,6 +40,8 @@ app.use('/orders', ordersRouters)
 app.use('/shipping-address', shippingAddressRouters)
 // Routes for search
 app.use('/search', searchRouters)
+// Routes for dashboard
+app.use('/dashboard', dashboardRouters)
 // Error handler
 app.use(defaultErrorHandler)
 // Health check

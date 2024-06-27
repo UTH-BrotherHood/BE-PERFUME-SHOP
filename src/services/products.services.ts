@@ -81,16 +81,18 @@ class ProductsService {
     const offset = (page - 1) * limit
 
     const productsResult = await databaseServices.query(
-      `SELECT *
-       FROM products
-       LIMIT $1
-       OFFSET $2`,
+      `SELECT p.*, c.name as category_name
+         FROM products p
+         INNER JOIN category c ON p.category_id = c.id
+         ORDER BY p.created_at DESC
+         LIMIT $1
+         OFFSET $2`,
       [limit, offset]
     )
 
     const totalResult = await databaseServices.query(
       `SELECT COUNT(*) AS total
-       FROM products`
+         FROM products`
     )
 
     return {
