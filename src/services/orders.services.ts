@@ -95,6 +95,7 @@ class OrdersService {
           s.address_line AS shipping_address_line,
           s.city AS shipping_city,
           s.country AS shipping_country,
+          pmt.payment_method,  
           oi.id AS order_item_id,
           oi.product_id,
           p.name AS product_name,
@@ -110,11 +111,13 @@ class OrdersService {
           products p ON oi.product_id = p.id
       JOIN 
           shipping_address s ON o.address_id = s.id
+      JOIN 
+          payment pmt ON o.payment_id = pmt.id 
       WHERE 
           o.user_id = $1 
       AND 
           o.id = $2;
-    `,
+      `,
       [user_id, order_id]
     )
     const rows = result.rows
@@ -132,6 +135,7 @@ class OrdersService {
       payment_id: rows[0].payment_id,
       total_price: rows[0].total_price,
       order_date: rows[0].order_date,
+      payment_method: rows[0].payment_method,
       shipping_address: {
         full_name: rows[0].shipping_full_name,
         phone_number: rows[0].shipping_phone_number,
