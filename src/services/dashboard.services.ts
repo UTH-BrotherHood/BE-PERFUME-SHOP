@@ -20,6 +20,7 @@ class DashboardService {
             o.order_date,
             o.total_price,
             p.name AS product_name,
+            p.images[1] AS product_image,
             oi.quantity,
             u.username AS customer_name
         FROM 
