@@ -51,7 +51,7 @@ class DashboardService {
             c.name
         ORDER BY 
             total_quantity_sold DESC
-        LIMIT 10;
+        LIMIT 4;
     `
     const most_sold_items_by_category = await databaseServices.query(query_most_sold_items_by_category)
 
