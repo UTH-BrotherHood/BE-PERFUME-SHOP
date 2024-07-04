@@ -148,3 +148,17 @@ export const meController = async (req: Request, res: Response, next: NextFuncti
     result: user
   })
 }
+
+export const updateProfileController = async (
+  req: Request<ParamsDictionary, any, ResetPasswordReqBody>,
+  res: Response,
+  next: NextFunction
+) => {
+  const { user_id } = req.decoded_authorization as TokenPayload
+  console.log(req.body)
+  const result = await usersService.updateProfile(user_id, req.body)
+  return res.json({
+    message: USERS_MESSAGES.UPDATE_PROFILE_SUCCESSFULLY,
+    result
+  })
+}

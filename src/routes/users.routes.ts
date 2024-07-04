@@ -8,6 +8,7 @@ import {
   registerController,
   resendVerifyEmailController,
   resetPasswordController,
+  updateProfileController,
   verifyEmailController,
   verifyForgotPasswordController
 } from '~/controllers/users.controllers'
@@ -118,5 +119,7 @@ Headers: { Authorization : Bearer <accessToken> }
 Method: GET
 */
 usersRouters.get('/me', accessTokenValidation, wrapRequestHandler(meController))
+
+usersRouters.patch('/me', accessTokenValidation, wrapRequestHandler(updateProfileController))
 
 export default usersRouters

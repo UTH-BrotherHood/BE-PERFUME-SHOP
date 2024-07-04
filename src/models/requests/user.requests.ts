@@ -60,3 +60,8 @@ export interface ChangePasswordReqBody {
   password: string
   confirm_password: string
 }
+
+export interface UpdateMeReqBody {
+  name: string
+  phone_number: string
+}

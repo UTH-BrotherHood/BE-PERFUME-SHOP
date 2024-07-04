@@ -48,7 +48,9 @@ export const USERS_MESSAGES = {
   // get me
   GET_ME_SUCCESSFULLY: 'Get me successfully',
   // user not verified
-  USER_NOT_VERIFIED: 'User not verified'
+  USER_NOT_VERIFIED: 'User not verified',
+  // update profile
+  UPDATE_PROFILE_SUCCESSFULLY: 'Update profile successfully'
 } as const
 
 export const CATEGORY_MESSAGES = {

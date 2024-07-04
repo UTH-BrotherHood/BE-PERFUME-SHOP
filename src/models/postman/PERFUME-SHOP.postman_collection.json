@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"xuannvuongg+24@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"X.hihi123\",\r\n    \"confirm_password\" :  \"X.hihi123\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
+							"raw": "{\r\n    \"email\": \"xuannvuongg+55269@gmail.com\",\r\n    \"name\": \"vuong\",\r\n    \"password\": \"String.123\",\r\n    \"confirm_password\" :  \"X.hihi123\",\r\n    \"date_of_birth\": \"2004-04-24\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -153,7 +153,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email_verify_token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTc4NTAwYTItYTRlNi00NzFiLWI2NjItYjBhZTQ5MDMxODhkIiwidG9rZW5fdHlwZSI6IkVtYWlsVmVyaWZpY2F0aW9uVG9rZW4iLCJ2ZXJpZnkiOiJWZXJpZmllZCIsImlhdCI6MTcxOTEzODQ4MywiZXhwIjoxNzE5MjI0ODgzfQ.2XhAeSZZ7zaU6drLpKMe5vk8wl01DeF2bkfsDm11c6U\"\r\n}",
+							"raw": "{\r\n    \"email_verify_token\" : \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODNlOGVhMWItNTM3Ny00ZTVlLWI2M2ItYjgxMjQ2YTA3ODk3IiwidG9rZW5fdHlwZSI6IkVtYWlsVmVyaWZpY2F0aW9uVG9rZW4iLCJ2ZXJpZnkiOiJVbnZlcmlmaWVkIiwiaWF0IjoxNzE5MjU0Nzk1LCJleHAiOjE3MTkzNDExOTV9.rNtd3pNxlw0lNqZnQLhgLI2W08ZjQ1_QwTVpSbq3XwA\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -289,6 +289,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "updateme",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"vuong da sua\",\r\n    \"phone_number\" : \"08888888\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/users/me",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"users",
+								"me"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -373,6 +400,9 @@
 				{
 					"name": "get all categories",
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -648,7 +678,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\" : \"62067927-5cc8-4bb0-9095-162e85ea1bfe\"\r\n}",
+							"raw": "{\r\n    \"product_id\" : \"6d7e34d6-761a-489c-a167-9cadbaf3a51e\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -764,7 +794,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"product_id\" : \"d8c05c72-338d-456c-8e63-4c660fc23d55\",\r\n    \"quantity\" : \"2\"\r\n}",
+							"raw": "{\r\n    \"product_id\" : \"jadore_eau_de_toilette\",\r\n    \"quantity\" : \"70\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1103,13 +1133,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{host}}/orders/38bf7288-4e87-4630-b3d1-69bd0163f8eb",
+							"raw": "{{host}}/orders/fc3caed5-1424-4538-9de0-0ca2606a153a",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"orders",
-								"38bf7288-4e87-4630-b3d1-69bd0163f8eb"
+								"fc3caed5-1424-4538-9de0-0ca2606a153a"
 							]
 						}
 					},
@@ -1170,6 +1200,61 @@
 									"key": "content",
 									"value": "product"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{access_token}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "dashboard",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/dashboard/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"dashboard",
+								""
 							]
 						}
 					},

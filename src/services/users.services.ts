@@ -339,6 +339,21 @@ class UsersService {
 
     return userQuery.rows[0]
   }
+
+  async updateProfile(user_id: string, payload: any) {
+    const { username, phone_number } = payload
+    console.log('name : ', username)
+    const result = await databaseServices.query(
+      `UPDATE users
+       SET username = $1,
+           phone_number = $2,
+           updated_at = CURRENT_TIMESTAMP
+       WHERE id = $3`,
+      [username, phone_number, user_id]
+    )
+
+    return result.rows[0]
+  }
 }
 const usersService = new UsersService()
 
