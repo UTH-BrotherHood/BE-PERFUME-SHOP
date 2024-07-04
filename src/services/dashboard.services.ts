@@ -85,12 +85,15 @@ class DashboardService {
 
     `
     const daily_sales = await databaseServices.query(query_daily_sales)
-
+    const users = await databaseServices.query(`
+          SELECT username , email from users
+      `)
     return {
       total: total.rows[0],
       latest_orders: latest_orders.rows,
       most_sold_items_by_category: most_sold_items_by_category.rows,
-      daily_sales: daily_sales.rows
+      daily_sales: daily_sales.rows,
+      users: users.rows
     }
   }
 }
